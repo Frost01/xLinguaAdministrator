@@ -467,7 +467,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "fk_abbreviation", "basewords")]
-        public EntityCollection<Baseword> basewords
+        public EntityCollection<Baseword> Basewords
         {
             get
             {
@@ -771,7 +771,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "fk_abbreviation", "abbreviations")]
-        public Abbreviation abbreviation
+        public Abbreviation Abbreviation
         {
             get
             {
@@ -787,7 +787,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Abbreviation> abbreviationReference
+        public EntityReference<Abbreviation> AbbreviationReference
         {
             get
             {
@@ -809,7 +809,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "complexphrases_fk", "complexphrases")]
-        public EntityCollection<Complexphras> complexphrases
+        public EntityCollection<Complexphras> Complexphrases
         {
             get
             {
@@ -831,7 +831,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "fk_specifics", "basicwordspecifics")]
-        public EntityCollection<Basewordspecific> basicwordspecifics
+        public EntityCollection<Basewordspecific> Basewordspecifics
         {
             get
             {
@@ -853,7 +853,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_baseword", "connections")]
-        public EntityCollection<Connection> connections
+        public EntityCollection<Connection> Connections
         {
             get
             {
@@ -875,7 +875,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_languages", "languages")]
-        public Language language
+        public Language Language
         {
             get
             {
@@ -891,7 +891,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Language> languageReference
+        public EntityReference<Language> LanguageReference
         {
             get
             {
@@ -913,7 +913,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_translation_basicword", "translations")]
-        public EntityCollection<Translation> translations
+        public EntityCollection<Translation> Translations
         {
             get
             {
@@ -935,7 +935,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_types", "types")]
-        public Wordtype type
+        public Wordtype Wordtype
         {
             get
             {
@@ -951,7 +951,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Wordtype> typeReference
+        public EntityReference<Wordtype> WordtypeReference
         {
             get
             {
@@ -1079,7 +1079,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "fk_specifics", "basewords")]
-        public Baseword baseword
+        public Baseword Baseword
         {
             get
             {
@@ -1095,7 +1095,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Baseword> basewordReference
+        public EntityReference<Baseword> BasewordReference
         {
             get
             {
@@ -1117,7 +1117,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_basicword", "specifics")]
-        public Specific specific
+        public Specific Specific
         {
             get
             {
@@ -1133,7 +1133,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Specific> specificReference
+        public EntityReference<Specific> SpecificReference
         {
             get
             {
@@ -1289,7 +1289,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "complexphrases_fk", "basewords")]
-        public Baseword baseword
+        public Baseword Baseword
         {
             get
             {
@@ -1305,7 +1305,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Baseword> basewordReference
+        public EntityReference<Baseword> BasewordReference
         {
             get
             {
@@ -1463,7 +1463,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_baseword", "basewords")]
-        public Baseword baseword
+        public Baseword Baseword
         {
             get
             {
@@ -1479,7 +1479,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Baseword> basewordReference
+        public EntityReference<Baseword> BasewordReference
         {
             get
             {
@@ -1779,7 +1779,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_function_types", "types")]
-        public Wordtype type
+        public Wordtype Wordtype
         {
             get
             {
@@ -1795,7 +1795,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Wordtype> typeReference
+        public EntityReference<Wordtype> WordtypeReference
         {
             get
             {
@@ -1817,7 +1817,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_functions_languages", "languages")]
-        public Language language
+        public Language Language
         {
             get
             {
@@ -1833,7 +1833,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Language> languageReference
+        public EntityReference<Language> LanguageReference
         {
             get
             {
@@ -2033,7 +2033,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_languages", "basewords")]
-        public EntityCollection<Baseword> basewords
+        public EntityCollection<Baseword> Basewords
         {
             get
             {
@@ -2055,7 +2055,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_functions_languages", "functions")]
-        public EntityCollection<Gramfunction> functions
+        public EntityCollection<Gramfunction> Gramfunctions
         {
             get
             {
@@ -2209,7 +2209,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_basicword", "basicwordspecifics")]
-        public EntityCollection<Basewordspecific> basicwordspecifics
+        public EntityCollection<Basewordspecific> Basewordspecifics
         {
             get
             {
@@ -2365,7 +2365,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_translation_basicword", "basewords")]
-        public Baseword baseword
+        public Baseword Baseword
         {
             get
             {
@@ -2381,7 +2381,7 @@ namespace Models.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Baseword> basewordReference
+        public EntityReference<Baseword> BasewordReference
         {
             get
             {
@@ -2487,7 +2487,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_types", "basewords")]
-        public EntityCollection<Baseword> basewords
+        public EntityCollection<Baseword> Basewords
         {
             get
             {
@@ -2509,7 +2509,7 @@ namespace Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "ref_function_types", "functions")]
-        public EntityCollection<Gramfunction> functions
+        public EntityCollection<Gramfunction> Gramfunctions
         {
             get
             {

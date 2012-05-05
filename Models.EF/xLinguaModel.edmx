@@ -361,7 +361,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Text" Type="String" Nullable="false" />
           <Property Name="Explanation" Type="String" />
-          <NavigationProperty Name="basewords" Relationship="xLingua_StagingModel.fk_abbreviation" FromRole="abbreviations" ToRole="basewords" />
+          <NavigationProperty Name="Basewords" Relationship="xLingua_StagingModel.fk_abbreviation" FromRole="abbreviations" ToRole="basewords" />
         </EntityType>
         <EntityType Name="Baseword">
           <Key>
@@ -377,13 +377,13 @@
           <Property Name="ReferenceNumber" Type="Int64" Nullable="false" />
           <Property Name="Comment" Type="String" />
           <Property Name="IsLocked" Type="Boolean" />
-          <NavigationProperty Name="abbreviation" Relationship="xLingua_StagingModel.fk_abbreviation" FromRole="basewords" ToRole="abbreviations" />
-          <NavigationProperty Name="complexphrases" Relationship="xLingua_StagingModel.complexphrases_fk" FromRole="basewords" ToRole="complexphrases" />
-          <NavigationProperty Name="basicwordspecifics" Relationship="xLingua_StagingModel.fk_specifics" FromRole="basewords" ToRole="basicwordspecifics" />
-          <NavigationProperty Name="connections" Relationship="xLingua_StagingModel.ref_baseword" FromRole="basewords" ToRole="connections" />
-          <NavigationProperty Name="language" Relationship="xLingua_StagingModel.ref_languages" FromRole="basewords" ToRole="languages" />
-          <NavigationProperty Name="translations" Relationship="xLingua_StagingModel.ref_translation_basicword" FromRole="basewords" ToRole="translations" />
-          <NavigationProperty Name="type" Relationship="xLingua_StagingModel.ref_types" FromRole="basewords" ToRole="types" />
+          <NavigationProperty Name="Abbreviation" Relationship="xLingua_StagingModel.fk_abbreviation" FromRole="basewords" ToRole="abbreviations" />
+          <NavigationProperty Name="Complexphrases" Relationship="xLingua_StagingModel.complexphrases_fk" FromRole="basewords" ToRole="complexphrases" />
+          <NavigationProperty Name="Basewordspecifics" Relationship="xLingua_StagingModel.fk_specifics" FromRole="basewords" ToRole="basicwordspecifics" />
+          <NavigationProperty Name="Connections" Relationship="xLingua_StagingModel.ref_baseword" FromRole="basewords" ToRole="connections" />
+          <NavigationProperty Name="Language" Relationship="xLingua_StagingModel.ref_languages" FromRole="basewords" ToRole="languages" />
+          <NavigationProperty Name="Translations" Relationship="xLingua_StagingModel.ref_translation_basicword" FromRole="basewords" ToRole="translations" />
+          <NavigationProperty Name="Wordtype" Relationship="xLingua_StagingModel.ref_types" FromRole="basewords" ToRole="types" />
         </EntityType>
         <EntityType Name="Basewordspecific">
           <Key>
@@ -392,8 +392,8 @@
           <Property Name="BasewordId" Type="Int32" />
           <Property Name="SpecificId" Type="Int32" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="baseword" Relationship="xLingua_StagingModel.fk_specifics" FromRole="basicwordspecifics" ToRole="basewords" />
-          <NavigationProperty Name="specific" Relationship="xLingua_StagingModel.ref_basicword" FromRole="basicwordspecifics" ToRole="specifics" />
+          <NavigationProperty Name="Baseword" Relationship="xLingua_StagingModel.fk_specifics" FromRole="basicwordspecifics" ToRole="basewords" />
+          <NavigationProperty Name="Specific" Relationship="xLingua_StagingModel.ref_basicword" FromRole="basicwordspecifics" ToRole="specifics" />
         </EntityType>
         <EntityType Name="Complexphras">
           <Key>
@@ -403,7 +403,7 @@
           <Property Name="BasewordId" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Int32" Nullable="false" />
           <Property Name="Text" Type="String" />
-          <NavigationProperty Name="baseword" Relationship="xLingua_StagingModel.complexphrases_fk" FromRole="complexphrases" ToRole="basewords" />
+          <NavigationProperty Name="Baseword" Relationship="xLingua_StagingModel.complexphrases_fk" FromRole="complexphrases" ToRole="basewords" />
         </EntityType>
         <EntityType Name="Connection">
           <Key>
@@ -413,7 +413,7 @@
           <Property Name="BasewordId" Type="Int32" Nullable="false" />
           <Property Name="GramfunctionId" Type="Int64" Nullable="false" />
           <Property Name="FlexionId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="baseword" Relationship="xLingua_StagingModel.ref_baseword" FromRole="connections" ToRole="basewords" />
+          <NavigationProperty Name="Baseword" Relationship="xLingua_StagingModel.ref_baseword" FromRole="connections" ToRole="basewords" />
           <NavigationProperty Name="Flexion" Relationship="xLingua_StagingModel.FlexionConnection" FromRole="Connection" ToRole="Flexion" />
         </EntityType>
         <EntityType Name="Gramfunction">
@@ -424,8 +424,8 @@
           <Property Name="Text" Type="String" Nullable="false" />
           <Property Name="WordtypeId" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="type" Relationship="xLingua_StagingModel.ref_function_types" FromRole="functions" ToRole="types" />
-          <NavigationProperty Name="language" Relationship="xLingua_StagingModel.ref_functions_languages" FromRole="functions" ToRole="languages" />
+          <NavigationProperty Name="Wordtype" Relationship="xLingua_StagingModel.ref_function_types" FromRole="functions" ToRole="types" />
+          <NavigationProperty Name="Language" Relationship="xLingua_StagingModel.ref_functions_languages" FromRole="functions" ToRole="languages" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -437,8 +437,8 @@
           <Property Name="EnglishName" Type="String" />
           <Property Name="CultureName" Type="String" />
           <Property Name="IsInterface" Type="Boolean" />
-          <NavigationProperty Name="basewords" Relationship="xLingua_StagingModel.ref_languages" FromRole="languages" ToRole="basewords" />
-          <NavigationProperty Name="functions" Relationship="xLingua_StagingModel.ref_functions_languages" FromRole="languages" ToRole="functions" />
+          <NavigationProperty Name="Basewords" Relationship="xLingua_StagingModel.ref_languages" FromRole="languages" ToRole="basewords" />
+          <NavigationProperty Name="Gramfunctions" Relationship="xLingua_StagingModel.ref_functions_languages" FromRole="languages" ToRole="functions" />
         </EntityType>
         <EntityType Name="Specific">
           <Key>
@@ -448,7 +448,7 @@
           <Property Name="Text" Type="String" Nullable="false" />
           <Property Name="LanguageId" Type="Int32" />
           <Property Name="WordtypeId" Type="Int32" />
-          <NavigationProperty Name="basicwordspecifics" Relationship="xLingua_StagingModel.ref_basicword" FromRole="specifics" ToRole="basicwordspecifics" />
+          <NavigationProperty Name="Basewordspecifics" Relationship="xLingua_StagingModel.ref_basicword" FromRole="specifics" ToRole="basicwordspecifics" />
         </EntityType>
         <EntityType Name="Translation">
           <Key>
@@ -458,7 +458,7 @@
           <Property Name="BasewordFromId" Type="Int32" Nullable="false" />
           <Property Name="BasewordToId" Type="Int32" Nullable="false" />
           <Property Name="Position" Type="Int32" />
-          <NavigationProperty Name="baseword" Relationship="xLingua_StagingModel.ref_translation_basicword" FromRole="translations" ToRole="basewords" />
+          <NavigationProperty Name="Baseword" Relationship="xLingua_StagingModel.ref_translation_basicword" FromRole="translations" ToRole="basewords" />
         </EntityType>
         <EntityType Name="Wordtype">
           <Key>
@@ -466,8 +466,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Text" Type="String" Nullable="false" />
-          <NavigationProperty Name="basewords" Relationship="xLingua_StagingModel.ref_types" FromRole="types" ToRole="basewords" />
-          <NavigationProperty Name="functions" Relationship="xLingua_StagingModel.ref_function_types" FromRole="types" ToRole="functions" />
+          <NavigationProperty Name="Basewords" Relationship="xLingua_StagingModel.ref_types" FromRole="types" ToRole="basewords" />
+          <NavigationProperty Name="Gramfunctions" Relationship="xLingua_StagingModel.ref_function_types" FromRole="types" ToRole="functions" />
         </EntityType>
         <EntityType Name="Flexion">
           <Key>
