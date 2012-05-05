@@ -1,0 +1,6 @@
+G:\xLinguaAdministrator\Models.EF\bin\Debug\Models.EF.dll.config
+G:\xLinguaAdministrator\Models.EF\bin\Debug\Models.EF.dll
+G:\xLinguaAdministrator\Models.EF\bin\Debug\Models.EF.pdb
+G:\xLinguaAdministrator\Models.EF\obj\Debug\ResolveAssemblyReference.cache
+G:\xLinguaAdministrator\Models.EF\obj\Debug\Models.EF.dll
+G:\xLinguaAdministrator\Models.EF\obj\Debug\Models.EF.pdb

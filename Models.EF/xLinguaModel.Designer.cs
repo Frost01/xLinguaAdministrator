@@ -28,6 +28,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("xLingua_StagingModel", "ref_basicword", "specifics", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Models.EF.Specific), "basicwordspecifics", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Basewordspecific), true)]
 [assembly: EdmRelationshipAttribute("xLingua_StagingModel", "ref_function_types", "types", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Models.EF.Wordtype), "functions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Gramfunction), true)]
 [assembly: EdmRelationshipAttribute("xLingua_StagingModel", "ref_functions_languages", "languages", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Models.EF.Language), "functions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Gramfunction), true)]
+[assembly: EdmRelationshipAttribute("xLingua_StagingModel", "FlexionConnection", "Flexion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Models.EF.Flexion), "Connection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Connection), true)]
 
 #endregion
 
@@ -1492,6 +1493,44 @@ namespace Models.EF
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "FlexionConnection", "Flexion")]
+        public Flexion Flexion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Flexion>("xLingua_StagingModel.FlexionConnection", "Flexion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Flexion>("xLingua_StagingModel.FlexionConnection", "Flexion").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Flexion> FlexionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Flexion>("xLingua_StagingModel.FlexionConnection", "Flexion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Flexion>("xLingua_StagingModel.FlexionConnection", "Flexion", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1573,6 +1612,31 @@ namespace Models.EF
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "FlexionConnection", "Connection")]
+        public EntityCollection<Connection> Connections
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Connection>("xLingua_StagingModel.FlexionConnection", "Connection");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Connection>("xLingua_StagingModel.FlexionConnection", "Connection", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>

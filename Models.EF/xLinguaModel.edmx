@@ -349,6 +349,10 @@
             <End Role="languages" EntitySet="Languages1" />
             <End Role="functions" EntitySet="Gramfunctions" />
           </AssociationSet>
+          <AssociationSet Name="FlexionConnection" Association="xLingua_StagingModel.FlexionConnection">
+            <End Role="Flexion" EntitySet="Flexions" />
+            <End Role="Connection" EntitySet="Connections1" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Abbreviation">
           <Key>
@@ -410,6 +414,7 @@
           <Property Name="GramfunctionId" Type="Int64" Nullable="false" />
           <Property Name="FlexionId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="baseword" Relationship="xLingua_StagingModel.ref_baseword" FromRole="connections" ToRole="basewords" />
+          <NavigationProperty Name="Flexion" Relationship="xLingua_StagingModel.FlexionConnection" FromRole="Connection" ToRole="Flexion" />
         </EntityType>
         <EntityType Name="Gramfunction">
           <Key>
@@ -470,6 +475,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Text" Type="String" />
+          <NavigationProperty Name="Connections" Relationship="xLingua_StagingModel.FlexionConnection" FromRole="Flexion" ToRole="Connection" />
         </EntityType>
         <Association Name="fk_abbreviation">
           <End Role="abbreviations" Type="xLingua_StagingModel.Abbreviation" Multiplicity="0..1" />
@@ -594,6 +600,18 @@
             </Principal>
             <Dependent Role="functions">
               <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FlexionConnection">
+          <End Type="xLingua_StagingModel.Flexion" Role="Flexion" Multiplicity="1" />
+          <End Type="xLingua_StagingModel.Connection" Role="Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flexion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="FlexionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -746,6 +764,10 @@
         <AssociationConnector Association="xLingua_StagingModel.ref_functions_languages" ManuallyRouted="false">
           <ConnectorPoint PointX="6.625" PointY="3.9612939453125" />
           <ConnectorPoint PointX="7.375" PointY="3.9612939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="xLingua_StagingModel.FlexionConnection">
+          <ConnectorPoint PointX="5.125" PointY="7.797841796875" />
+          <ConnectorPoint PointX="4.25" PointY="7.797841796875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
