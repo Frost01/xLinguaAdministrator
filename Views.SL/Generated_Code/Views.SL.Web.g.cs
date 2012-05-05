@@ -8,6 +8,225 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+namespace Models.EF
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.DomainServices;
+    using System.ServiceModel.DomainServices.Client;
+    using System.ServiceModel.DomainServices.Client.ApplicationServices;
+    
+    
+    /// <summary>
+    /// The 'Language' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/Models.EF")]
+    public sealed partial class Language : Entity
+    {
+        
+        private string _code;
+        
+        private string _cultureName;
+        
+        private string _englishName;
+        
+        private int _id;
+        
+        private Nullable<bool> _isInterface;
+        
+        private string _nativeName;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnCodeChanging(string value);
+        partial void OnCodeChanged();
+        partial void OnCultureNameChanging(string value);
+        partial void OnCultureNameChanged();
+        partial void OnEnglishNameChanging(string value);
+        partial void OnEnglishNameChanged();
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+        partial void OnIsInterfaceChanging(Nullable<bool> value);
+        partial void OnIsInterfaceChanged();
+        partial void OnNativeNameChanging(string value);
+        partial void OnNativeNameChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Language"/> class.
+        /// </summary>
+        public Language()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Code' value.
+        /// </summary>
+        [DataMember()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                if ((this._code != value))
+                {
+                    this.OnCodeChanging(value);
+                    this.RaiseDataMemberChanging("Code");
+                    this.ValidateProperty("Code", value);
+                    this._code = value;
+                    this.RaiseDataMemberChanged("Code");
+                    this.OnCodeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'CultureName' value.
+        /// </summary>
+        [DataMember()]
+        public string CultureName
+        {
+            get
+            {
+                return this._cultureName;
+            }
+            set
+            {
+                if ((this._cultureName != value))
+                {
+                    this.OnCultureNameChanging(value);
+                    this.RaiseDataMemberChanging("CultureName");
+                    this.ValidateProperty("CultureName", value);
+                    this._cultureName = value;
+                    this.RaiseDataMemberChanged("CultureName");
+                    this.OnCultureNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'EnglishName' value.
+        /// </summary>
+        [DataMember()]
+        public string EnglishName
+        {
+            get
+            {
+                return this._englishName;
+            }
+            set
+            {
+                if ((this._englishName != value))
+                {
+                    this.OnEnglishNameChanging(value);
+                    this.RaiseDataMemberChanging("EnglishName");
+                    this.ValidateProperty("EnglishName", value);
+                    this._englishName = value;
+                    this.RaiseDataMemberChanged("EnglishName");
+                    this.OnEnglishNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'IsInterface' value.
+        /// </summary>
+        [DataMember()]
+        public Nullable<bool> IsInterface
+        {
+            get
+            {
+                return this._isInterface;
+            }
+            set
+            {
+                if ((this._isInterface != value))
+                {
+                    this.OnIsInterfaceChanging(value);
+                    this.RaiseDataMemberChanging("IsInterface");
+                    this.ValidateProperty("IsInterface", value);
+                    this._isInterface = value;
+                    this.RaiseDataMemberChanged("IsInterface");
+                    this.OnIsInterfaceChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'NativeName' value.
+        /// </summary>
+        [DataMember()]
+        public string NativeName
+        {
+            get
+            {
+                return this._nativeName;
+            }
+            set
+            {
+                if ((this._nativeName != value))
+                {
+                    this.OnNativeNameChanging(value);
+                    this.RaiseDataMemberChanging("NativeName");
+                    this.ValidateProperty("NativeName", value);
+                    this._nativeName = value;
+                    this.RaiseDataMemberChanged("NativeName");
+                    this.OnNativeNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+}
 namespace Views.SL
 {
     using System;
@@ -61,6 +280,131 @@ namespace Views.SL
             get
             {
                 return ((WebContext)(WebContextBase.Current));
+            }
+        }
+    }
+}
+namespace Views.SL.Web.xLinguaService
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.DomainServices;
+    using System.ServiceModel.DomainServices.Client;
+    using System.ServiceModel.DomainServices.Client.ApplicationServices;
+    using System.ServiceModel.Web;
+    using Models.EF;
+    
+    
+    /// <summary>
+    /// The DomainContext corresponding to the 'LanguageContext' DomainService.
+    /// </summary>
+    public sealed partial class LanguageContext : DomainContext
+    {
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LanguageContext"/> class.
+        /// </summary>
+        public LanguageContext() : 
+                this(new WebDomainClient<ILanguageContextContract>(new Uri("Views-SL-Web-xLinguaService-LanguageContext.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LanguageContext"/> class with the specified service URI.
+        /// </summary>
+        /// <param name="serviceUri">The LanguageContext service URI.</param>
+        public LanguageContext(Uri serviceUri) : 
+                this(new WebDomainClient<ILanguageContextContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LanguageContext"/> class with the specified <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">The DomainClient instance to use for this DomainContext.</param>
+        public LanguageContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Language"/> entity instances that have been loaded into this <see cref="LanguageContext"/> instance.
+        /// </summary>
+        public EntitySet<Language> Languages
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Language>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Language"/> entity instances using the 'GetLanguages' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Language"/> entity instances.</returns>
+        public EntityQuery<Language> GetLanguagesQuery()
+        {
+            this.ValidateMethod("GetLanguagesQuery", null);
+            return base.CreateQuery<Language>("GetLanguages", null, false, true);
+        }
+        
+        /// <summary>
+        /// Creates a new EntityContainer for this DomainContext's EntitySets.
+        /// </summary>
+        /// <returns>A new container instance.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new LanguageContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Service contract for the 'LanguageContext' DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ILanguageContextContract
+        {
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetLanguages' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/LanguageContext/GetLanguagesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/LanguageContext/GetLanguages", ReplyAction="http://tempuri.org/LanguageContext/GetLanguagesResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetLanguages(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetLanguages'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetLanguages'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetLanguages' operation.</returns>
+            QueryResult<Language> EndGetLanguages(IAsyncResult result);
+        }
+        
+        internal sealed class LanguageContextEntityContainer : EntityContainer
+        {
+            
+            public LanguageContextEntityContainer()
+            {
+                this.CreateEntitySet<Language>(EntitySetOperations.None);
             }
         }
     }
