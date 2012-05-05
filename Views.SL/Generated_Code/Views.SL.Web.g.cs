@@ -22,6 +22,328 @@ namespace Models.EF
     
     
     /// <summary>
+    /// The 'Baseword' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/Models.EF")]
+    public sealed partial class Baseword : Entity
+    {
+        
+        private Nullable<int> _abbrevationId;
+        
+        private string _comment;
+        
+        private int _id;
+        
+        private Nullable<bool> _isLocked;
+        
+        private int _languageId;
+        
+        private long _referenceNumber;
+        
+        private Nullable<int> _status;
+        
+        private string _text;
+        
+        private Nullable<int> _value;
+        
+        private int _wordtypeId;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnAbbrevationIdChanging(Nullable<int> value);
+        partial void OnAbbrevationIdChanged();
+        partial void OnCommentChanging(string value);
+        partial void OnCommentChanged();
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+        partial void OnIsLockedChanging(Nullable<bool> value);
+        partial void OnIsLockedChanged();
+        partial void OnLanguageIdChanging(int value);
+        partial void OnLanguageIdChanged();
+        partial void OnReferenceNumberChanging(long value);
+        partial void OnReferenceNumberChanged();
+        partial void OnStatusChanging(Nullable<int> value);
+        partial void OnStatusChanged();
+        partial void OnTextChanging(string value);
+        partial void OnTextChanged();
+        partial void OnValueChanging(Nullable<int> value);
+        partial void OnValueChanged();
+        partial void OnWordtypeIdChanging(int value);
+        partial void OnWordtypeIdChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Baseword"/> class.
+        /// </summary>
+        public Baseword()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'AbbrevationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> AbbrevationId
+        {
+            get
+            {
+                return this._abbrevationId;
+            }
+            set
+            {
+                if ((this._abbrevationId != value))
+                {
+                    this.OnAbbrevationIdChanging(value);
+                    this.RaiseDataMemberChanging("AbbrevationId");
+                    this.ValidateProperty("AbbrevationId", value);
+                    this._abbrevationId = value;
+                    this.RaiseDataMemberChanged("AbbrevationId");
+                    this.OnAbbrevationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Comment' value.
+        /// </summary>
+        [DataMember()]
+        public string Comment
+        {
+            get
+            {
+                return this._comment;
+            }
+            set
+            {
+                if ((this._comment != value))
+                {
+                    this.OnCommentChanging(value);
+                    this.RaiseDataMemberChanging("Comment");
+                    this.ValidateProperty("Comment", value);
+                    this._comment = value;
+                    this.RaiseDataMemberChanged("Comment");
+                    this.OnCommentChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'IsLocked' value.
+        /// </summary>
+        [DataMember()]
+        public Nullable<bool> IsLocked
+        {
+            get
+            {
+                return this._isLocked;
+            }
+            set
+            {
+                if ((this._isLocked != value))
+                {
+                    this.OnIsLockedChanging(value);
+                    this.RaiseDataMemberChanging("IsLocked");
+                    this.ValidateProperty("IsLocked", value);
+                    this._isLocked = value;
+                    this.RaiseDataMemberChanged("IsLocked");
+                    this.OnIsLockedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'LanguageId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public int LanguageId
+        {
+            get
+            {
+                return this._languageId;
+            }
+            set
+            {
+                if ((this._languageId != value))
+                {
+                    this.OnLanguageIdChanging(value);
+                    this.RaiseDataMemberChanging("LanguageId");
+                    this.ValidateProperty("LanguageId", value);
+                    this._languageId = value;
+                    this.RaiseDataMemberChanged("LanguageId");
+                    this.OnLanguageIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ReferenceNumber' value.
+        /// </summary>
+        [DataMember()]
+        public long ReferenceNumber
+        {
+            get
+            {
+                return this._referenceNumber;
+            }
+            set
+            {
+                if ((this._referenceNumber != value))
+                {
+                    this.OnReferenceNumberChanging(value);
+                    this.RaiseDataMemberChanging("ReferenceNumber");
+                    this.ValidateProperty("ReferenceNumber", value);
+                    this._referenceNumber = value;
+                    this.RaiseDataMemberChanged("ReferenceNumber");
+                    this.OnReferenceNumberChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [DataMember()]
+        public Nullable<int> Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Text' value.
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        public string Text
+        {
+            get
+            {
+                return this._text;
+            }
+            set
+            {
+                if ((this._text != value))
+                {
+                    this.OnTextChanging(value);
+                    this.RaiseDataMemberChanging("Text");
+                    this.ValidateProperty("Text", value);
+                    this._text = value;
+                    this.RaiseDataMemberChanged("Text");
+                    this.OnTextChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Value' value.
+        /// </summary>
+        [DataMember()]
+        public Nullable<int> Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                if ((this._value != value))
+                {
+                    this.OnValueChanging(value);
+                    this.RaiseDataMemberChanging("Value");
+                    this.ValidateProperty("Value", value);
+                    this._value = value;
+                    this.RaiseDataMemberChanged("Value");
+                    this.OnValueChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'WordtypeId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public int WordtypeId
+        {
+            get
+            {
+                return this._wordtypeId;
+            }
+            set
+            {
+                if ((this._wordtypeId != value))
+                {
+                    this.OnWordtypeIdChanging(value);
+                    this.RaiseDataMemberChanging("WordtypeId");
+                    this.ValidateProperty("WordtypeId", value);
+                    this._wordtypeId = value;
+                    this.RaiseDataMemberChanged("WordtypeId");
+                    this.OnWordtypeIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
     /// The 'Language' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/Models.EF")]
@@ -395,6 +717,152 @@ namespace Views.SL.Web.xLinguaService
     
     
     /// <summary>
+    /// The DomainContext corresponding to the 'BasewordContext' DomainService.
+    /// </summary>
+    public sealed partial class BasewordContext : DomainContext
+    {
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BasewordContext"/> class.
+        /// </summary>
+        public BasewordContext() : 
+                this(new WebDomainClient<IBasewordContextContract>(new Uri("Views-SL-Web-xLinguaService-BasewordContext.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BasewordContext"/> class with the specified service URI.
+        /// </summary>
+        /// <param name="serviceUri">The BasewordContext service URI.</param>
+        public BasewordContext(Uri serviceUri) : 
+                this(new WebDomainClient<IBasewordContextContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BasewordContext"/> class with the specified <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">The DomainClient instance to use for this DomainContext.</param>
+        public BasewordContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Baseword"/> entity instances that have been loaded into this <see cref="BasewordContext"/> instance.
+        /// </summary>
+        public EntitySet<Baseword> Basewords
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Baseword>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Baseword"/> entity instances using the 'GetBasewords' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Baseword"/> entity instances.</returns>
+        public EntityQuery<Baseword> GetBasewordsQuery()
+        {
+            this.ValidateMethod("GetBasewordsQuery", null);
+            return base.CreateQuery<Baseword>("GetBasewords", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Baseword"/> entity instances using the 'GetBasewordsByLanguageIdAndWordtypeId' query.
+        /// </summary>
+        /// <param name="languageId">The value for the 'languageId' parameter of the query.</param>
+        /// <param name="wordtypeId">The value for the 'wordtypeId' parameter of the query.</param>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Baseword"/> entity instances.</returns>
+        public EntityQuery<Baseword> GetBasewordsByLanguageIdAndWordtypeIdQuery(int languageId, int wordtypeId)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("languageId", languageId);
+            parameters.Add("wordtypeId", wordtypeId);
+            this.ValidateMethod("GetBasewordsByLanguageIdAndWordtypeIdQuery", parameters);
+            return base.CreateQuery<Baseword>("GetBasewordsByLanguageIdAndWordtypeId", parameters, false, true);
+        }
+        
+        /// <summary>
+        /// Creates a new EntityContainer for this DomainContext's EntitySets.
+        /// </summary>
+        /// <returns>A new container instance.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new BasewordContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Service contract for the 'BasewordContext' DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IBasewordContextContract
+        {
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetBasewords' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BasewordContext/GetBasewordsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BasewordContext/GetBasewords", ReplyAction="http://tempuri.org/BasewordContext/GetBasewordsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetBasewords(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetBasewords'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetBasewords'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetBasewords' operation.</returns>
+            QueryResult<Baseword> EndGetBasewords(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetBasewordsByLanguageIdAndWordtypeId' operation.
+            /// </summary>
+            /// <param name="languageId">The value for the 'languageId' parameter of this action.</param>
+            /// <param name="wordtypeId">The value for the 'wordtypeId' parameter of this action.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BasewordContext/GetBasewordsByLanguageIdAndWordtypeIdDomainSer" +
+                "viceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BasewordContext/GetBasewordsByLanguageIdAndWordtypeId", ReplyAction="http://tempuri.org/BasewordContext/GetBasewordsByLanguageIdAndWordtypeIdResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetBasewordsByLanguageIdAndWordtypeId(int languageId, int wordtypeId, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetBasewordsByLanguageIdAndWordtypeId'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetBasewordsByLanguageIdAndWordtypeId'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetBasewordsByLanguageIdAndWordtypeId' operation.</returns>
+            QueryResult<Baseword> EndGetBasewordsByLanguageIdAndWordtypeId(IAsyncResult result);
+        }
+        
+        internal sealed class BasewordContextEntityContainer : EntityContainer
+        {
+            
+            public BasewordContextEntityContainer()
+            {
+                this.CreateEntitySet<Baseword>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
     /// The DomainContext corresponding to the 'LanguageContext' DomainService.
     /// </summary>
     public sealed partial class LanguageContext : DomainContext
@@ -450,6 +918,19 @@ namespace Views.SL.Web.xLinguaService
         }
         
         /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Language"/> entity instances using the 'GetLanguageById' query.
+        /// </summary>
+        /// <param name="id">The value for the 'id' parameter of the query.</param>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Language"/> entity instances.</returns>
+        public EntityQuery<Language> GetLanguageByIdQuery(int id)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("id", id);
+            this.ValidateMethod("GetLanguageByIdQuery", parameters);
+            return base.CreateQuery<Language>("GetLanguageById", parameters, false, false);
+        }
+        
+        /// <summary>
         /// Gets an EntityQuery instance that can be used to load <see cref="Language"/> entity instances using the 'GetLanguages' query.
         /// </summary>
         /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Language"/> entity instances.</returns>
@@ -474,6 +955,25 @@ namespace Views.SL.Web.xLinguaService
         [ServiceContract()]
         public interface ILanguageContextContract
         {
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetLanguageById' operation.
+            /// </summary>
+            /// <param name="id">The value for the 'id' parameter of this action.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/LanguageContext/GetLanguageByIdDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/LanguageContext/GetLanguageById", ReplyAction="http://tempuri.org/LanguageContext/GetLanguageByIdResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetLanguageById(int id, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetLanguageById'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetLanguageById'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetLanguageById' operation.</returns>
+            QueryResult<Language> EndGetLanguageById(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetLanguages' operation.

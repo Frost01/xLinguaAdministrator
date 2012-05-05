@@ -22,7 +22,13 @@ namespace Views.SL.ViewModels
         public ObservableCollection<LanguageViewModel> Languages
         {
             get { return _languages; }
-            private set {SetPropertyValue(ref _languages, value, () => Languages);}
+            private set
+            {
+                if (_languages != value)
+                {
+                    SetPropertyValue(ref _languages, value, () => Languages);
+                }
+            }
         }
 
         private ObservableCollection<WordtypeViewModel> _wordtypes;
@@ -30,8 +36,52 @@ namespace Views.SL.ViewModels
         public ObservableCollection<WordtypeViewModel> Wordtypes
         {
             get { return _wordtypes; }
-            private set {SetPropertyValue(ref _wordtypes, value, () => Wordtypes);}
-        } 
+            private set
+            {
+                if (_wordtypes != value)
+                {
+                    SetPropertyValue(ref _wordtypes, value, () => Wordtypes);
+                }
+            }
+        }
+
+        private ObservableCollection<BasewordViewModel> _basewords;
+ 
+        public ObservableCollection<BasewordViewModel> Basewords
+        {
+            get { return _basewords; }
+            set { SetPropertyValue(ref _basewords, value, () => Basewords);}
+        }
+
+        private LanguageViewModel _selectedLanguage;
+
+        public LanguageViewModel SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set
+            {
+                if (value != _selectedLanguage)
+                {
+                    SetPropertyValue(ref _selectedLanguage, value, () => SelectedLanguage);
+                    RefreshBasewords();
+                }
+            }
+        }
+
+        private WordtypeViewModel _selectedWordtype;
+        
+        public WordtypeViewModel SelectedWordtype
+        {
+            get { return _selectedWordtype; }
+            set
+            {
+                if (_selectedWordtype != value)
+                {
+                    SetPropertyValue(ref _selectedWordtype, value, () => SelectedWordtype);
+                    RefreshBasewords();
+                }
+            }
+        }
 
         public MainPageViewModel()
         {
@@ -39,6 +89,7 @@ namespace Views.SL.ViewModels
             languageContext.Load(languageContext.GetLanguagesQuery(), LoadOpLanguageCallback, null);
             var wordtypeContext = new WordtypeContext();
             wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), LoadOpWordtypeCallback, null);
+            Basewords = new ObservableCollection<BasewordViewModel>();
         }
 
         private void LoadOpLanguageCallback(LoadOperation<Language> loadOperation)
@@ -58,6 +109,27 @@ namespace Views.SL.ViewModels
             foreach (var wordtype in loadedWordtypes)
             {
                 Wordtypes.Add(new WordtypeViewModel(wordtype));
+            }
+        }
+
+        private void RefreshBasewords()
+        {
+            if (SelectedLanguage != null && SelectedWordtype != null)
+            {
+                var basewordContext = new BasewordContext();
+                basewordContext.Load(
+                    basewordContext.GetBasewordsByLanguageIdAndWordtypeIdQuery(SelectedLanguage.Id, SelectedWordtype.Id),
+                    BasewordLoadOpCallback, null);
+            }
+        }
+
+        private void BasewordLoadOpCallback(LoadOperation<Baseword> loadOperation )
+        {
+            Basewords = new ObservableCollection<BasewordViewModel>();
+            var loadedBasewords = loadOperation.AllEntities;
+            foreach (var loadedBaseword in loadedBasewords)
+            {
+                Basewords.Add(new BasewordViewModel(loadedBaseword));
             }
         }
     }

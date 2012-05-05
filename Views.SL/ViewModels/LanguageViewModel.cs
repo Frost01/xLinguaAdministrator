@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Models.EF;
+using Views.SL.Web.xLinguaService;
 
 namespace Views.SL.ViewModels
 {
@@ -39,7 +40,6 @@ namespace Views.SL.ViewModels
 
         public LanguageViewModel(Entity languageEntity):this(languageEntity as Language)
         {
-            
         }
     } 
 }

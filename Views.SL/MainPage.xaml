@@ -14,8 +14,18 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding Path=Languages}" DisplayMemberPath="Text"/>
-        <ListBox Grid.Column="1" ItemsSource="{Binding Path=Wordtypes}" DisplayMemberPath="Text"/>
-    </Grid>
+        <ListBox ItemsSource="{Binding Path=Languages}" 
+                 DisplayMemberPath="Text"
+                 SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
+        <ListBox Grid.Column="1" 
+                 ItemsSource="{Binding Path=Wordtypes}" 
+                 DisplayMemberPath="Text"
+                 SelectedItem="{Binding Path=SelectedWordtype, Mode=TwoWay}"/>
+        <ListBox Grid.Column="2"
+                 ItemsSource="{Binding Path=Basewords}"
+                 DisplayMemberPath="Text"
+                 />
+     </Grid>
 </UserControl>

@@ -19,22 +19,22 @@ namespace Views.SL.Web.xLinguaService
     // Also consider adding roles to restrict access as appropriate.
     // [RequiresAuthentication]
     [EnableClientAccess()]
-    public class LanguageContext : LinqToEntitiesDomainService<xLingua_StagingEntities>
+    public class BasewordContext : LinqToEntitiesDomainService<xLingua_StagingEntities>
     {
 
         // TODO:
         // Consider constraining the results of your query method.  If you need additional input you can
         // add parameters to this method or create additional query methods with different names.
-        // To support paging you will need to add ordering to the 'Languages1' query.
-        public IQueryable<Language> GetLanguages()
+        // To support paging you will need to add ordering to the 'Basewords1' query.
+        public IQueryable<Baseword> GetBasewords()
         {
-            return this.ObjectContext.Languages1;
+            return this.ObjectContext.Basewords1;
         }
 
-        public Language GetLanguageById(int id)
+        public IQueryable<Baseword> GetBasewordsByLanguageIdAndWordtypeId(int languageId, int wordtypeId)
         {
-            return this.ObjectContext.Languages1.FirstOrDefault(l => l.Id == id);
-        }
+            return this.ObjectContext.Basewords1.Where(b => b.LanguageId == languageId && b.WordtypeId == wordtypeId);
+        } 
     }
 }
 
