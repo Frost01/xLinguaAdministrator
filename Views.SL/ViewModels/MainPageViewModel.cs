@@ -23,12 +23,22 @@ namespace Views.SL.ViewModels
         {
             get { return _languages; }
             private set {SetPropertyValue(ref _languages, value, () => Languages);}
+        }
+
+        private ObservableCollection<WordtypeViewModel> _wordtypes;
+
+        public ObservableCollection<WordtypeViewModel> Wordtypes
+        {
+            get { return _wordtypes; }
+            private set {SetPropertyValue(ref _wordtypes, value, () => Wordtypes);}
         } 
 
         public MainPageViewModel()
         {
             var languageContext = new LanguageContext();
             languageContext.Load(languageContext.GetLanguagesQuery(), LoadOpLanguageCallback, null);
+            var wordtypeContext = new WordtypeContext();
+            wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), LoadOpWordtypeCallback, null);
         }
 
         private void LoadOpLanguageCallback(LoadOperation<Language> loadOperation)
@@ -38,6 +48,16 @@ namespace Views.SL.ViewModels
             foreach (var language in loadedLanguages)
             {
                 Languages.Add(new LanguageViewModel(language));
+            }
+        }
+
+        private void LoadOpWordtypeCallback(LoadOperation<Wordtype> loadOperation )
+        {
+            Wordtypes = new ObservableCollection<WordtypeViewModel>();
+            var loadedWordtypes = loadOperation.AllEntities;
+            foreach (var wordtype in loadedWordtypes)
+            {
+                Wordtypes.Add(new WordtypeViewModel(wordtype));
             }
         }
     }

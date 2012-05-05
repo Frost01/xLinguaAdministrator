@@ -11,6 +11,11 @@
     </UserControl.DataContext>
 
     <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <ListBox ItemsSource="{Binding Path=Languages}" DisplayMemberPath="Text"/>
+        <ListBox Grid.Column="1" ItemsSource="{Binding Path=Wordtypes}" DisplayMemberPath="Text"/>
     </Grid>
 </UserControl>

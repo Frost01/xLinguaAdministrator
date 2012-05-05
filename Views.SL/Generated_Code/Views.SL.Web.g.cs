@@ -226,6 +226,101 @@ namespace Models.EF
             return this._id;
         }
     }
+    
+    /// <summary>
+    /// The 'Wordtype' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/Models.EF")]
+    public sealed partial class Wordtype : Entity
+    {
+        
+        private int _id;
+        
+        private string _text;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+        partial void OnTextChanging(string value);
+        partial void OnTextChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Wordtype"/> class.
+        /// </summary>
+        public Wordtype()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Text' value.
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        public string Text
+        {
+            get
+            {
+                return this._text;
+            }
+            set
+            {
+                if ((this._text != value))
+                {
+                    this.OnTextChanging(value);
+                    this.RaiseDataMemberChanging("Text");
+                    this.ValidateProperty("Text", value);
+                    this._text = value;
+                    this.RaiseDataMemberChanged("Text");
+                    this.OnTextChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
 }
 namespace Views.SL
 {
@@ -405,6 +500,116 @@ namespace Views.SL.Web.xLinguaService
             public LanguageContextEntityContainer()
             {
                 this.CreateEntitySet<Language>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// The DomainContext corresponding to the 'WordtypeContext' DomainService.
+    /// </summary>
+    public sealed partial class WordtypeContext : DomainContext
+    {
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WordtypeContext"/> class.
+        /// </summary>
+        public WordtypeContext() : 
+                this(new WebDomainClient<IWordtypeContextContract>(new Uri("Views-SL-Web-xLinguaService-WordtypeContext.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WordtypeContext"/> class with the specified service URI.
+        /// </summary>
+        /// <param name="serviceUri">The WordtypeContext service URI.</param>
+        public WordtypeContext(Uri serviceUri) : 
+                this(new WebDomainClient<IWordtypeContextContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WordtypeContext"/> class with the specified <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">The DomainClient instance to use for this DomainContext.</param>
+        public WordtypeContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Wordtype"/> entity instances that have been loaded into this <see cref="WordtypeContext"/> instance.
+        /// </summary>
+        public EntitySet<Wordtype> Wordtypes
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Wordtype>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Wordtype"/> entity instances using the 'GetWordtypes' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Wordtype"/> entity instances.</returns>
+        public EntityQuery<Wordtype> GetWordtypesQuery()
+        {
+            this.ValidateMethod("GetWordtypesQuery", null);
+            return base.CreateQuery<Wordtype>("GetWordtypes", null, false, true);
+        }
+        
+        /// <summary>
+        /// Creates a new EntityContainer for this DomainContext's EntitySets.
+        /// </summary>
+        /// <returns>A new container instance.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new WordtypeContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Service contract for the 'WordtypeContext' DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IWordtypeContextContract
+        {
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetWordtypes' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/WordtypeContext/GetWordtypesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/WordtypeContext/GetWordtypes", ReplyAction="http://tempuri.org/WordtypeContext/GetWordtypesResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetWordtypes(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetWordtypes'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetWordtypes'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetWordtypes' operation.</returns>
+            QueryResult<Wordtype> EndGetWordtypes(IAsyncResult result);
+        }
+        
+        internal sealed class WordtypeContextEntityContainer : EntityContainer
+        {
+            
+            public WordtypeContextEntityContainer()
+            {
+                this.CreateEntitySet<Wordtype>(EntitySetOperations.None);
             }
         }
     }
