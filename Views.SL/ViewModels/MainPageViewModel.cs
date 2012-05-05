@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net;
 using System.ServiceModel.DomainServices.Client;
 using System.Windows;
@@ -61,36 +62,6 @@ namespace Views.SL.ViewModels
             set { SetPropertyValue(ref _searchedBasewords, value, () => SearchedBasewords); }
         }
 
-        private LanguageViewModel _selectedLanguage;
-
-        public LanguageViewModel SelectedLanguage
-        {
-            get { return _selectedLanguage; }
-            set
-            {
-                if (value != _selectedLanguage)
-                {
-                    SetPropertyValue(ref _selectedLanguage, value, () => SelectedLanguage);
-                    RefreshBasewords();
-                }
-            }
-        }
-
-        private WordtypeViewModel _selectedWordtype;
-        
-        public WordtypeViewModel SelectedWordtype
-        {
-            get { return _selectedWordtype; }
-            set
-            {
-                if (_selectedWordtype != value)
-                {
-                    SetPropertyValue(ref _selectedWordtype, value, () => SelectedWordtype);
-                    RefreshBasewords();
-                }
-            }
-        }
-
         private string _searchText;
 
         public string SearchText
@@ -123,11 +94,14 @@ namespace Views.SL.ViewModels
 
         public MainPageViewModel()
         {
-            var languageContext = new LanguageContext();
-            languageContext.Load(languageContext.GetLanguagesQuery(), LoadOpLanguageCallback, null);
-            var wordtypeContext = new WordtypeContext();
-            wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), LoadOpWordtypeCallback, null);
-            Basewords = new ObservableCollection<BasewordViewModel>();
+            if (!DesignerProperties.IsInDesignTool)
+            {
+                var languageContext = new LanguageContext();
+                languageContext.Load(languageContext.GetLanguagesQuery(), LoadOpLanguageCallback, null);
+                var wordtypeContext = new WordtypeContext();
+                wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), LoadOpWordtypeCallback, null);
+                Basewords = new ObservableCollection<BasewordViewModel>();
+            }
         }
 
         private void LoadOpLanguageCallback(LoadOperation<Language> loadOperation)
@@ -150,25 +124,5 @@ namespace Views.SL.ViewModels
             }
         }
 
-        private void RefreshBasewords()
-        {
-            if (SelectedLanguage != null && SelectedWordtype != null)
-            {
-                var basewordContext = new BasewordContext();
-                basewordContext.Load(
-                    basewordContext.GetBasewordsByLanguageIdAndWordtypeIdQuery(SelectedLanguage.Id, SelectedWordtype.Id),
-                    BasewordLoadOpCallback, null);
-            }
-        }
-
-        private void BasewordLoadOpCallback(LoadOperation<Baseword> loadOperation )
-        {
-            Basewords = new ObservableCollection<BasewordViewModel>();
-            var loadedBasewords = loadOperation.Entities;
-            foreach (var loadedBaseword in loadedBasewords)
-            {
-                Basewords.Add(new BasewordViewModel(loadedBaseword));
-            }
-        }
     }
 }

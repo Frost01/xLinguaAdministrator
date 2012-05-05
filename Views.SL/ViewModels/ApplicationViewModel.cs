@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.ServiceModel.DomainServices.Client;
@@ -50,10 +51,13 @@ namespace Views.SL.ViewModels
             {
                 Instance = this;
             }
-            var languageContext = new LanguageContext();
-            languageContext.Load(languageContext.GetLanguagesQuery(), LanguageLoadOpCallback, null);
-            var wordtypeContext = new WordtypeContext();
-            wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), WordtypeLoadOpCallback, null);
+            if (!DesignerProperties.IsInDesignTool)
+            {
+                var languageContext = new LanguageContext();
+                languageContext.Load(languageContext.GetLanguagesQuery(), LanguageLoadOpCallback, null);
+                var wordtypeContext = new WordtypeContext();
+                wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), WordtypeLoadOpCallback, null);
+            }
         }
 
         public static ApplicationViewModel Instance { get; private set; }

@@ -19,6 +19,9 @@ namespace Views.SL.ViewModels
         private string _text;
         private LanguageViewModel _language;
         private WordtypeViewModel _wordtype;
+        private string _comment;
+        private bool _isLocked;
+        private int _status;
 
         public int Id
         {
@@ -29,13 +32,13 @@ namespace Views.SL.ViewModels
         public string Text
         {
             get { return _text; }
-            set {SetPropertyValue(ref _text,value, () => Text);}
+            set { SetPropertyValue(ref _text,value, () => Text);}
         }
 
         public LanguageViewModel Language
         {
             get { return _language; }
-            set {SetPropertyValue(ref _language,value, () => Language);}
+            set { SetPropertyValue(ref _language,value, () => Language);}
         }
 
         public WordtypeViewModel Wordtype
@@ -44,12 +47,32 @@ namespace Views.SL.ViewModels
             set { SetPropertyValue(ref _wordtype,value, () => Wordtype);}
         }
 
+        public string Comment
+        {
+            get { return _comment; }
+            set { SetPropertyValue(ref _comment, value, () => Comment); }
+        }
+
+        public bool IsLocked
+        {
+            get { return _isLocked; }
+            set { SetPropertyValue(ref _isLocked,value, () => IsLocked);}
+        }
+
+        public int Status
+        {
+            get { return _status; }
+            set { SetPropertyValue(ref _status, value, () => Status);}
+        }
+
         public BasewordViewModel(Baseword baseword)
         {
             Id = baseword.Id;
             Text = baseword.Text;
             Language = ApplicationViewModel.Instance.GetLanguageById(baseword.LanguageId);
             Wordtype = ApplicationViewModel.Instance.GetWordtypeById(baseword.WordtypeId);
+            Comment = baseword.Comment;
+            IsLocked = baseword.IsLocked.GetValueOrDefault();
         }
 
         public BasewordViewModel(Entity baseword):this(baseword as Baseword){}

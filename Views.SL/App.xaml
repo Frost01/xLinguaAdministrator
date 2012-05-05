@@ -4,6 +4,6 @@
              x:Class="Views.SL.App"
              >
     <Application.Resources>
-        <viewmodels:ApplicationViewModel x:Key="ApplicationViewModel"/>
+        <viewmodels:ApplicationViewModel x:Key="ApplicationViewModelResource"/>
     </Application.Resources>
 </Application>
