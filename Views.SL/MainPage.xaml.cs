@@ -18,5 +18,6 @@ namespace Views.SL
         {
             InitializeComponent();
         }
+
     }
 }

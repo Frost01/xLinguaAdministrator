@@ -53,6 +53,14 @@ namespace Views.SL.ViewModels
             set { SetPropertyValue(ref _basewords, value, () => Basewords);}
         }
 
+        private ObservableCollection<BasewordViewModel> _searchedBasewords;
+
+        public ObservableCollection<BasewordViewModel> SearchedBasewords
+        {
+            get { return _searchedBasewords; }
+            set { SetPropertyValue(ref _searchedBasewords, value, () => SearchedBasewords); }
+        }
+
         private LanguageViewModel _selectedLanguage;
 
         public LanguageViewModel SelectedLanguage
@@ -80,6 +88,36 @@ namespace Views.SL.ViewModels
                     SetPropertyValue(ref _selectedWordtype, value, () => SelectedWordtype);
                     RefreshBasewords();
                 }
+            }
+        }
+
+        private string _searchText;
+
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                if (_searchText != value)
+                {
+                    SetPropertyValue(ref _searchText, value, () => SearchText);
+                    UpdateSearchedBasewords();
+                }
+            }
+        }
+
+        private void UpdateSearchedBasewords()
+        {
+            var basewordContext = new BasewordContext();
+            basewordContext.Load(basewordContext.GetBasewordByTextQuery(SearchText), SearchedBasewordsLoadOpCallback,null);
+        }
+
+        private void SearchedBasewordsLoadOpCallback(LoadOperation<Baseword> loadOperation )
+        {
+            SearchedBasewords = new ObservableCollection<BasewordViewModel>();
+            foreach (var entity in loadOperation.AllEntities)
+            {
+               SearchedBasewords.Add(new BasewordViewModel(entity));
             }
         }
 

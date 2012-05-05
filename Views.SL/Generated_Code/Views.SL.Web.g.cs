@@ -14,6 +14,7 @@ namespace Models.EF
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Runtime.Serialization;
     using System.ServiceModel.DomainServices;
@@ -139,6 +140,7 @@ namespace Models.EF
         /// <summary>
         /// Gets or sets the 'Id' value.
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataMember()]
         [Editable(false, AllowInitialValue=true)]
         [Key()]
@@ -468,6 +470,7 @@ namespace Models.EF
         /// <summary>
         /// Gets or sets the 'Id' value.
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataMember()]
         [Editable(false, AllowInitialValue=true)]
         [Key()]
@@ -586,6 +589,7 @@ namespace Models.EF
         /// <summary>
         /// Gets or sets the 'Id' value.
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataMember()]
         [Editable(false, AllowInitialValue=true)]
         [Key()]
@@ -772,6 +776,19 @@ namespace Views.SL.Web.xLinguaService
         }
         
         /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Baseword"/> entity instances using the 'GetBasewordByText' query.
+        /// </summary>
+        /// <param name="text">The value for the 'text' parameter of the query.</param>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Baseword"/> entity instances.</returns>
+        public EntityQuery<Baseword> GetBasewordByTextQuery(string text)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("text", text);
+            this.ValidateMethod("GetBasewordByTextQuery", parameters);
+            return base.CreateQuery<Baseword>("GetBasewordByText", parameters, false, true);
+        }
+        
+        /// <summary>
         /// Gets an EntityQuery instance that can be used to load <see cref="Baseword"/> entity instances using the 'GetBasewords' query.
         /// </summary>
         /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Baseword"/> entity instances.</returns>
@@ -811,6 +828,25 @@ namespace Views.SL.Web.xLinguaService
         [ServiceContract()]
         public interface IBasewordContextContract
         {
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetBasewordByText' operation.
+            /// </summary>
+            /// <param name="text">The value for the 'text' parameter of this action.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BasewordContext/GetBasewordByTextDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BasewordContext/GetBasewordByText", ReplyAction="http://tempuri.org/BasewordContext/GetBasewordByTextResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetBasewordByText(string text, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetBasewordByText'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetBasewordByText'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetBasewordByText' operation.</returns>
+            QueryResult<Baseword> EndGetBasewordByText(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetBasewords' operation.

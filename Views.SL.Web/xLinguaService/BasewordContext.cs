@@ -36,7 +36,13 @@ namespace Views.SL.Web.xLinguaService
         public IQueryable<Baseword> GetBasewordsByLanguageIdAndWordtypeId(int languageId, int wordtypeId)
         {
             return this.ObjectContext.Basewords1.Where(b => b.LanguageId == languageId && b.WordtypeId == wordtypeId);
-        } 
+        }
+ 
+        [Query(ResultLimit = 100)]
+        public IQueryable<Baseword> GetBasewordByText(string text)
+        {
+            return this.ObjectContext.Basewords1.Where(b => b.Text.StartsWith(text));
+        }
     }
 }
 
