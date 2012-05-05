@@ -126,7 +126,7 @@ namespace Views.SL.ViewModels
         private void BasewordLoadOpCallback(LoadOperation<Baseword> loadOperation )
         {
             Basewords = new ObservableCollection<BasewordViewModel>();
-            var loadedBasewords = loadOperation.AllEntities;
+            var loadedBasewords = loadOperation.Entities;
             foreach (var loadedBaseword in loadedBasewords)
             {
                 Basewords.Add(new BasewordViewModel(loadedBaseword));
