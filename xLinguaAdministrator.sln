@@ -3,16 +3,38 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.EF", "Models.EF\Models.EF.csproj", "{5D4896E9-393F-490F-957D-8E581CF46321}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleShowCase", "ConsoleShowCase\ConsoleShowCase.csproj", "{CEA78349-21B5-437E-A009-9B02C2705F62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5D4896E9-393F-490F-957D-8E581CF46321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D4896E9-393F-490F-957D-8E581CF46321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D4896E9-393F-490F-957D-8E581CF46321}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5D4896E9-393F-490F-957D-8E581CF46321}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5D4896E9-393F-490F-957D-8E581CF46321}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{5D4896E9-393F-490F-957D-8E581CF46321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D4896E9-393F-490F-957D-8E581CF46321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D4896E9-393F-490F-957D-8E581CF46321}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D4896E9-393F-490F-957D-8E581CF46321}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D4896E9-393F-490F-957D-8E581CF46321}.Release|x86.ActiveCfg = Release|Any CPU
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Debug|x86.ActiveCfg = Debug|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Debug|x86.Build.0 = Debug|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Release|Any CPU.ActiveCfg = Release|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Release|Mixed Platforms.Build.0 = Release|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Release|x86.ActiveCfg = Release|x86
+		{CEA78349-21B5-437E-A009-9B02C2705F62}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
