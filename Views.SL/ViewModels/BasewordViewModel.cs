@@ -48,6 +48,8 @@ namespace Views.SL.ViewModels
         {
             Id = baseword.Id;
             Text = baseword.Text;
+            Language = ApplicationViewModel.Instance.GetLanguageById(baseword.LanguageId);
+            Wordtype = ApplicationViewModel.Instance.GetWordtypeById(baseword.WordtypeId);
         }
 
         public BasewordViewModel(Entity baseword):this(baseword as Baseword){}

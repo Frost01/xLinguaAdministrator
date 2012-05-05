@@ -23,20 +23,11 @@
         </Grid.ColumnDefinitions>
         <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <ListBox Grid.Column="1" Grid.Row="0" Name="SearchResults" ItemsSource="{Binding Path=SearchedBasewords}" DisplayMemberPath="Text"/>
-        <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding ElementName=SearchResults, Path=SelectedItem.Id}"/>
-        <ListBox Grid.Row="1"
-                 ItemsSource="{Binding Path=Languages}" 
-                 DisplayMemberPath="Text"
-                 SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
-        <ListBox Grid.Column="1" 
-                 Grid.Row="1"
-                 ItemsSource="{Binding Path=Wordtypes}" 
-                 DisplayMemberPath="Text"
-                 SelectedItem="{Binding Path=SelectedWordtype, Mode=TwoWay}"/>
-        <ListBox Grid.Column="2"
-                 Grid.Row="1"
-                 ItemsSource="{Binding Path=Basewords}"
-                 DisplayMemberPath="Text"
-                 />
+        <StackPanel Grid.Column="2" Grid.Row="0" DataContext="{Binding ElementName=SearchResults, Path=SelectedItem}">
+            <TextBlock Text="{Binding Path=Id}"/>
+            <TextBlock Text="{Binding Path=Wordtype.Text}"/>
+            <TextBlock Text="{Binding Path=Language.Text}"/>
+        </StackPanel>
+
      </Grid>
 </UserControl>

@@ -1,8 +1,9 @@
 ﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:viewmodels="clr-namespace:Views.SL.ViewModels"
              x:Class="Views.SL.App"
              >
     <Application.Resources>
-        
+        <viewmodels:ApplicationViewModel x:Key="ApplicationViewModel"/>
     </Application.Resources>
 </Application>
