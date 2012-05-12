@@ -7,6 +7,7 @@ namespace ViewModels.Enums
 {
     public enum Language
     {
+        All = 0,
         German = 1,
         Polish = 2,
         English = 3,

@@ -744,14 +744,18 @@
         <AssociationConnector Association="xLingua_StagingModel.ref_translation_basicword" ManuallyRouted="false">
           <ConnectorPoint PointX="4.34375" PointY="4.7879036458333317" />
           <ConnectorPoint PointX="4.34375" PointY="6.09375" />
+          <ConnectorPoint PointX="4.1798004391141221" PointY="6.0937499999999991" />
+          <ConnectorPoint PointX="4.0131337724474561" PointY="6.09375" />
           <ConnectorPoint PointX="3.6458333333333335" PointY="6.0937499999999991" />
           <ConnectorPoint PointX="3.4791666666666665" PointY="6.09375" />
           <ConnectorPoint PointX="2.125" PointY="6.09375" />
         </AssociationConnector>
         <AssociationConnector Association="xLingua_StagingModel.ref_types" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.375" PointY="6.453125" />
-          <ConnectorPoint PointX="4.359375" PointY="6.453125" />
-          <ConnectorPoint PointX="4.359375" PointY="4.7879036458333317" />
+          <ConnectorPoint PointX="7.375" PointY="6.4062505000000005" />
+          <ConnectorPoint PointX="4.5" PointY="6.4062505000000005" />
+          <ConnectorPoint PointX="4.5" PointY="6.625" />
+          <ConnectorPoint PointX="4.0964671057807891" PointY="6.625" />
+          <ConnectorPoint PointX="4.0964671057807891" PointY="4.7879036458333317" />
         </AssociationConnector>
         <AssociationConnector Association="xLingua_StagingModel.ref_basicword" ManuallyRouted="false">
           <ConnectorPoint PointX="7.375" PointY="1.4901432291666659" />

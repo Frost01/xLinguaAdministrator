@@ -48,6 +48,7 @@
     <Compile Include="Enums\Language.cs" />
     <Compile Include="MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WordtypeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models.EF\Models.EF.csproj">

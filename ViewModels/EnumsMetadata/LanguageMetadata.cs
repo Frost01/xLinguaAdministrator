@@ -13,6 +13,7 @@ namespace ViewModels.EnumsMetadata
         static LanguageMetadata()
         {
             Data = new List<LanguageMetadata>();
+            Data.Add(new LanguageMetadata{Language = Language.All, DisplayText = "Alle", BusinessValue = 0});
             Data.Add(new LanguageMetadata{Language = Language.German, DisplayText = "German", BusinessValue = 1});
             Data.Add(new LanguageMetadata{Language = Language.Polish, DisplayText = "Polish", BusinessValue = 2});
             Data.Add(new LanguageMetadata{Language = Language.English, DisplayText = "English", BusinessValue = 3});
