@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
@@ -48,6 +49,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -61,6 +63,14 @@
             <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Source={x:Static enumdata:LanguageMetadata.Data}}" DisplayMemberPath="DisplayText" SelectedValue="{Binding Path=Language}" SelectedValuePath="Language"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Wordtype"/>
             <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=DataContext.Wordtypes}" DisplayMemberPath="Text" SelectedValue="{Binding Path=Wordtype.Id}" SelectedValuePath="Id" />
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Delete"/>
+            <Button Grid.Column="1" Content="Update"/>
         </Grid>
     </Grid>
 </Page>
