@@ -10,6 +10,7 @@ namespace ViewModels
     {
         private int _id;
         private string _text;
+        private Enums.Language _language;
 
         public int Id
         {
@@ -28,10 +29,20 @@ namespace ViewModels
             }
         }
 
+        public Enums.Language Language
+        {
+            get { return _language; }
+            set
+            {
+                SetPropertyValue(ref _language, value, () => Language);
+            }
+        }
+
         public BasewordViewModel(Baseword baseword)
         {
             Id = baseword.Id;
             Text = baseword.Text;
+            Language = (Enums.Language) baseword.LanguageId;
         }
     }
 }

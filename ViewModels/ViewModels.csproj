@@ -44,6 +44,8 @@
     <Compile Include="ApplicationViewModel.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="BasewordViewModel.cs" />
+    <Compile Include="EnumsMetadata\LanguageMetadata.cs" />
+    <Compile Include="Enums\Language.cs" />
     <Compile Include="MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,6 +55,7 @@
       <Name>Models.EF</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

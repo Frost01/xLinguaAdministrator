@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:viewmodels="clr-namespace:ViewModels;assembly=ViewModels"
+      xmlns:enumdata="clr-namespace:ViewModels.EnumsMetadata;assembly=ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Page1">
@@ -15,7 +16,49 @@
             <ColumnDefinition />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0" Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-        <ListBox Grid.Column="1" ItemsSource="{Binding Path=Basewords}" DisplayMemberPath="Text"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.ColumnSpan="3" Content="Suche nach Text, Wortart und oder Sprache"/>
+            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" />
+            <ComboBox Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Source={x:Static enumdata:LanguageMetadata.Data}}" DisplayMemberPath="DisplayText" SelectedValuePath="Language"/>
+        </Grid>
+        <ListBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" ItemsSource="{Binding Path=Basewords}" DisplayMemberPath="Text" Name="BasewordListbox"/>
+        <Grid Grid.Column="0" Grid.Row="1" DataContext="{Binding Path=SelectedItem, ElementName=BasewordListbox}">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Id"/>
+            <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Content="{Binding Path=Id}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Text"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Text}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Language"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Source={x:Static enumdata:LanguageMetadata.Data}}" DisplayMemberPath="DisplayText" SelectedValue="{Binding Path=Language}" SelectedValuePath="Language"/>
+        </Grid>
     </Grid>
 </Page>
