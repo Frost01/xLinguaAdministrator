@@ -12,6 +12,7 @@ namespace ViewModels
         private string _text;
         private Enums.Language _language;
         private WordtypeViewModel _wordtype;
+        private string _comment;
 
         public int Id
         {
@@ -45,12 +46,19 @@ namespace ViewModels
             set { SetPropertyValue(ref _wordtype, value, () => Wordtype);}
         }
 
+        public string Comment
+        {
+            get { return _comment; }
+            set { SetPropertyValue(ref _comment, value, ()=> Comment);}
+        }
+
         public BasewordViewModel(Baseword baseword)
         {
             Id = baseword.Id;
             Text = baseword.Text;
             Language = (Enums.Language) baseword.LanguageId;
             Wordtype = new WordtypeViewModel(baseword.Wordtype);
+            Comment = baseword.Comment;
         }
     }
 }

@@ -37,7 +37,7 @@
             <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=Wordtypes}" DisplayMemberPath="Text" SelectedItem="{Binding Path=SelectedWordtype}"/>
             <ComboBox Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Source={x:Static enumdata:LanguageMetadata.Data}}" DisplayMemberPath="DisplayText" SelectedValuePath="Language" SelectedValue="{Binding Path=SelectedLanguage}"/>
         </Grid>
-        <ListBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" ItemsSource="{Binding Path=Basewords}" DisplayMemberPath="Text" Name="BasewordListbox"/>
+        <ListBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" ItemsSource="{Binding Path=Basewords}" DisplayMemberPath="Text" Name="BasewordListbox" SelectedItem="{Binding Path=SelectedBaseword}"/>
         <Grid Grid.Column="0" Grid.Row="1" DataContext="{Binding Path=SelectedItem, ElementName=BasewordListbox}">
             <Grid.Resources>
                 <Style TargetType="Label">
@@ -45,6 +45,7 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
+                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -63,14 +64,16 @@
             <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Source={x:Static enumdata:LanguageMetadata.Data}}" DisplayMemberPath="DisplayText" SelectedValue="{Binding Path=Language}" SelectedValuePath="Language"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Wordtype"/>
             <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=DataContext.Wordtypes}" DisplayMemberPath="Text" SelectedValue="{Binding Path=Wordtype.Id}" SelectedValuePath="Id" />
+            <Label Grid.Row="4" Grid.Column="0" Content="Comment"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=Comment}"/>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Delete"/>
-            <Button Grid.Column="1" Content="Update"/>
+            <Button Grid.Column="0" Content="Delete" IsEnabled="False"/>
+            <Button Grid.Column="1" Content="Update" Command="{Binding Path=UpdateBasewordCommand}"/>
         </Grid>
     </Grid>
 </Page>
