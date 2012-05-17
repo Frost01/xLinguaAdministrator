@@ -27,7 +27,7 @@
             <ListBox Grid.Column="0" Grid.Row="1" Name="SearchResults" 
                      ItemsSource="{Binding Path=SearchedBasewords}" 
                      DisplayMemberPath="Text" 
-                     SelectedItem="{Binding Path=SelectedBaseword}"
+                     SelectedItem="{Binding Path=SelectedBaseword, Mode=TwoWay}"
                      Height="100" 
                      BorderThickness="1" 
                      Margin="5"/>

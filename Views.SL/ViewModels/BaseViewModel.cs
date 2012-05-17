@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 
 namespace Views.SL.ViewModels
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged, ICommandManager
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

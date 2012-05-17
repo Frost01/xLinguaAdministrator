@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.ServiceModel.DomainServices.Client;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Models.EF;
+using Views.SL.Web.xLinguaService;
 
 namespace Views.SL.ViewModels
 {
@@ -77,5 +79,23 @@ namespace Views.SL.ViewModels
 
         public BasewordViewModel(Entity baseword):this(baseword as Baseword){}
 
+
+        internal void Update()
+        {
+            var context = new BasewordContext();
+            var baseword = (from b in context.Basewords
+                            where b.Id == Id
+                            select b).SingleOrDefault();
+            if (baseword != null)
+            {
+                baseword.Text = this.Text;
+                baseword.LanguageId = this.Language.Id;
+                baseword.WordtypeId = this.Wordtype.Id;
+                baseword.Comment = this.Comment;
+                baseword.IsLocked = this.IsLocked;
+                context.SubmitChanges();
+            }
+
+        }
     }
 }

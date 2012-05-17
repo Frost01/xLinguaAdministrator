@@ -92,7 +92,7 @@ namespace Views.SL.ViewModels
                 languageContext.Load(languageContext.GetLanguagesQuery(), LoadOpLanguageCallback, null);
                 var wordtypeContext = new WordtypeContext();
                 wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), LoadOpWordtypeCallback, null);
-                _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword(), this);
+                _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword());
             }
         }
 
@@ -125,7 +125,7 @@ namespace Views.SL.ViewModels
 
         private void UpdateBaseword()
         {
-            
+            SelectedBaseword.Update();
         }
 
         private bool CanUpdateBaseword()
@@ -143,7 +143,7 @@ namespace Views.SL.ViewModels
                 if (_selectedBaseword != value)
                 {
                     SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
-                    
+                    UpdateBasewordCommand.UpdateCanExecute();
                 }
             }
         }

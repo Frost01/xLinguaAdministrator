@@ -14,65 +14,39 @@ namespace Views.SL.ViewModels
 {
     public class RelayCommand : ICommand
     {
-        #region Fields
+        public event EventHandler CanExecuteChanged;
 
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
+        Predicate<Object> _canExecute = null;
+        Action<Object> _executeAction = null;
 
-        /// <summary>
-        /// In WPF we could use CommandManager. Does not work with SilverLight. Using this ICommandManager interface provides an alternative working for both SilverLight and WPF
-        /// </summary>
-        private readonly ICommandManager _commandManager;
 
-        #endregion // Fields
-
-        #region Constructors
-
-        /// <summary>
-        /// Creates a new command that can always execute.
-        /// </summary>
-        /// <param name="execute">The execution logic.
-        public RelayCommand(Action<object> execute, ICommandManager commandManager)
-            : this(execute, null, commandManager)
+        public RelayCommand(Action<object> executeAction, Predicate<Object> canExecute = null)
         {
-        }
-
-        /// <summary>
-        /// Creates a new command.
-        /// </summary>
-        /// <param name="execute">The execution logic.
-        /// <param name="canExecute">The execution status logic.
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute, ICommandManager commandManager)
-        {
-            if (execute == null)
-                throw new ArgumentNullException("execute");
-
-            _execute = execute;
+            _executeAction = executeAction;
             _canExecute = canExecute;
-            _commandManager = commandManager;
         }
 
-        #endregion // Constructors
 
-        #region ICommand Members
+        public void UpdateCanExecute()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, new EventArgs());
+        }
 
-        [DebuggerStepThrough]
+
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute(parameter);
+            if (_canExecute != null)
+                return _canExecute(parameter);
+
+            return true;
         }
 
-        public event EventHandler CanExecuteChanged
-        {
-            add { _commandManager.RequerySuggested += value; }
-            remove { _commandManager.RequerySuggested -= value; }
-        }
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            if (_executeAction != null)
+                _executeAction(parameter);
         }
-
-        #endregion // ICommand Members
     }
 }
