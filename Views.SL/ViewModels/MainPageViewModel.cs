@@ -46,14 +46,6 @@ namespace Views.SL.ViewModels
             }
         }
 
-        private ObservableCollection<BasewordViewModel> _basewords;
- 
-        public ObservableCollection<BasewordViewModel> Basewords
-        {
-            get { return _basewords; }
-            set { SetPropertyValue(ref _basewords, value, () => Basewords);}
-        }
-
         private ObservableCollection<BasewordViewModel> _searchedBasewords;
 
         public ObservableCollection<BasewordViewModel> SearchedBasewords
@@ -100,7 +92,7 @@ namespace Views.SL.ViewModels
                 languageContext.Load(languageContext.GetLanguagesQuery(), LoadOpLanguageCallback, null);
                 var wordtypeContext = new WordtypeContext();
                 wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), LoadOpWordtypeCallback, null);
-                Basewords = new ObservableCollection<BasewordViewModel>();
+                _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword(), this);
             }
         }
 
@@ -121,6 +113,38 @@ namespace Views.SL.ViewModels
             foreach (var wordtype in loadedWordtypes)
             {
                 Wordtypes.Add(new WordtypeViewModel(wordtype));
+            }
+        }
+
+        private RelayCommand _updateBasewordCommand;
+
+        public RelayCommand UpdateBasewordCommand
+        {
+            get { return _updateBasewordCommand; }
+        }
+
+        private void UpdateBaseword()
+        {
+            
+        }
+
+        private bool CanUpdateBaseword()
+        {
+            return SelectedBaseword != null;
+        }
+
+        private BasewordViewModel _selectedBaseword;
+
+        public BasewordViewModel SelectedBaseword
+        {
+            get { return _selectedBaseword; }
+            set
+            {
+                if (_selectedBaseword != value)
+                {
+                    SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
+                    
+                }
             }
         }
 
