@@ -35,13 +35,13 @@ namespace Views.SL.Web.xLinguaService
         [Query(ResultLimit = 100)]
         public IQueryable<Baseword> GetBasewordsByLanguageIdAndWordtypeId(int languageId, int wordtypeId)
         {
-            return this.ObjectContext.Basewords1.Where(b => b.LanguageId == languageId && b.WordtypeId == wordtypeId);
+            return this.ObjectContext.Basewords1.Where(b => b.LanguageId == languageId && b.WordtypeId == wordtypeId).OrderBy(b=>b.Text);
         }
  
         [Query(ResultLimit = 100)]
         public IQueryable<Baseword> GetBasewordByText(string text)
         {
-            return this.ObjectContext.Basewords1.Where(b => b.Text.StartsWith(text));
+            return this.ObjectContext.Basewords1.Where(b => b.Text.StartsWith(text)).OrderBy(b => b.Text);
         }
     }
 }
