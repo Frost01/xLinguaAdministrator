@@ -7,15 +7,11 @@ using System.Text;
 namespace DTO
 {
     [DataContract]
-    public class BasewordDto
+    public class WordtypeDto
     {
         [DataMember]
         public int Id { get; set; }
         [DataMember]
         public string Text { get; set; }
-        [DataMember]
-        public LanguageDto Language { get; set; }
-        [DataMember]
-        public WordtypeDto Wordtype { get; set; }
     }
 }

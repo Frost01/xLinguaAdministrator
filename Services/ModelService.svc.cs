@@ -19,11 +19,12 @@ namespace Services
         public IList<BasewordDto> GetBasewordsByText(string text)
         {
             var resultList = new List<BasewordDto>();
-            var basewords = _context.Basewords1.Include("Language").Where(b => b.Text.StartsWith(text)).Take(20);
+            var basewords = _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Text.StartsWith(text)).Take(20);
             foreach (Baseword baseword in basewords)
             {
-                var languageDto = new LanguageDto { Id = baseword.LanguageId, Text = baseword.Language.EnglishName };
-                var basewordDto = new BasewordDto {Id = baseword.Id, Text = baseword.Text, Language = languageDto};
+                var languageDto = new LanguageDto {Id = baseword.LanguageId, Text = baseword.Language.EnglishName };
+                var wordtypeDto = new WordtypeDto {Id = baseword.WordtypeId, Text = baseword.Wordtype.Text};
+                var basewordDto = new BasewordDto {Id = baseword.Id, Text = baseword.Text, Language = languageDto, Wordtype = wordtypeDto};
                 resultList.Add(basewordDto);
             }
             return resultList;
