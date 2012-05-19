@@ -238,6 +238,11 @@ namespace Views.SL.ModelServiceReference {
         System.IAsyncResult BeginDeleteBaseword(Views.SL.ModelServiceReference.BasewordDto baseword, System.AsyncCallback callback, object asyncState);
         
         bool EndDeleteBaseword(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/GetTranslationsFromBaseword", ReplyAction="http://tempuri.org/IModelService/GetTranslationsFromBasewordResponse")]
+        System.IAsyncResult BeginGetTranslationsFromBaseword(Views.SL.ModelServiceReference.BasewordDto basewordDto, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> EndGetTranslationsFromBaseword(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -341,6 +346,25 @@ namespace Views.SL.ModelServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTranslationsFromBasewordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTranslationsFromBasewordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ModelServiceClient : System.ServiceModel.ClientBase<Views.SL.ModelServiceReference.IModelService>, Views.SL.ModelServiceReference.IModelService {
         
         private BeginOperationDelegate onBeginGetBasewordsByTextOrIdDelegate;
@@ -372,6 +396,12 @@ namespace Views.SL.ModelServiceReference {
         private EndOperationDelegate onEndDeleteBasewordDelegate;
         
         private System.Threading.SendOrPostCallback onDeleteBasewordCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTranslationsFromBasewordDelegate;
+        
+        private EndOperationDelegate onEndGetTranslationsFromBasewordDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTranslationsFromBasewordCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -435,6 +465,8 @@ namespace Views.SL.ModelServiceReference {
         public event System.EventHandler<UpdateBasewordCompletedEventArgs> UpdateBasewordCompleted;
         
         public event System.EventHandler<DeleteBasewordCompletedEventArgs> DeleteBasewordCompleted;
+        
+        public event System.EventHandler<GetTranslationsFromBasewordCompletedEventArgs> GetTranslationsFromBasewordCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -666,6 +698,52 @@ namespace Views.SL.ModelServiceReference {
                         baseword}, this.onEndDeleteBasewordDelegate, this.onDeleteBasewordCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Views.SL.ModelServiceReference.IModelService.BeginGetTranslationsFromBaseword(Views.SL.ModelServiceReference.BasewordDto basewordDto, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTranslationsFromBaseword(basewordDto, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> Views.SL.ModelServiceReference.IModelService.EndGetTranslationsFromBaseword(System.IAsyncResult result) {
+            return base.Channel.EndGetTranslationsFromBaseword(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTranslationsFromBaseword(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Views.SL.ModelServiceReference.BasewordDto basewordDto = ((Views.SL.ModelServiceReference.BasewordDto)(inValues[0]));
+            return ((Views.SL.ModelServiceReference.IModelService)(this)).BeginGetTranslationsFromBaseword(basewordDto, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTranslationsFromBaseword(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> retVal = ((Views.SL.ModelServiceReference.IModelService)(this)).EndGetTranslationsFromBaseword(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTranslationsFromBasewordCompleted(object state) {
+            if ((this.GetTranslationsFromBasewordCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTranslationsFromBasewordCompleted(this, new GetTranslationsFromBasewordCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTranslationsFromBasewordAsync(Views.SL.ModelServiceReference.BasewordDto basewordDto) {
+            this.GetTranslationsFromBasewordAsync(basewordDto, null);
+        }
+        
+        public void GetTranslationsFromBasewordAsync(Views.SL.ModelServiceReference.BasewordDto basewordDto, object userState) {
+            if ((this.onBeginGetTranslationsFromBasewordDelegate == null)) {
+                this.onBeginGetTranslationsFromBasewordDelegate = new BeginOperationDelegate(this.OnBeginGetTranslationsFromBaseword);
+            }
+            if ((this.onEndGetTranslationsFromBasewordDelegate == null)) {
+                this.onEndGetTranslationsFromBasewordDelegate = new EndOperationDelegate(this.OnEndGetTranslationsFromBaseword);
+            }
+            if ((this.onGetTranslationsFromBasewordCompletedDelegate == null)) {
+                this.onGetTranslationsFromBasewordCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTranslationsFromBasewordCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTranslationsFromBasewordDelegate, new object[] {
+                        basewordDto}, this.onEndGetTranslationsFromBasewordDelegate, this.onGetTranslationsFromBasewordCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -802,6 +880,19 @@ namespace Views.SL.ModelServiceReference {
             public bool EndDeleteBaseword(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 bool _result = ((bool)(base.EndInvoke("DeleteBaseword", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetTranslationsFromBaseword(Views.SL.ModelServiceReference.BasewordDto basewordDto, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = basewordDto;
+                System.IAsyncResult _result = base.BeginInvoke("GetTranslationsFromBaseword", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> EndGetTranslationsFromBaseword(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto>)(base.EndInvoke("GetTranslationsFromBaseword", _args, result)));
                 return _result;
             }
         }

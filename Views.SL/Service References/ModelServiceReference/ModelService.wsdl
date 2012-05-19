@@ -37,6 +37,12 @@
   <wsdl:message name="IModelService_DeleteBaseword_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteBasewordResponse" />
   </wsdl:message>
+  <wsdl:message name="IModelService_GetTranslationsFromBaseword_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTranslationsFromBaseword" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetTranslationsFromBaseword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTranslationsFromBasewordResponse" />
+  </wsdl:message>
   <wsdl:portType name="IModelService">
     <wsdl:operation name="GetBasewordsByTextOrId">
       <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByTextOrId" message="tns:IModelService_GetBasewordsByTextOrId_InputMessage" />
@@ -57,6 +63,10 @@
     <wsdl:operation name="DeleteBaseword">
       <wsdl:input wsaw:Action="http://tempuri.org/IModelService/DeleteBaseword" message="tns:IModelService_DeleteBaseword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IModelService/DeleteBasewordResponse" message="tns:IModelService_DeleteBaseword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTranslationsFromBaseword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetTranslationsFromBaseword" message="tns:IModelService_GetTranslationsFromBaseword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetTranslationsFromBasewordResponse" message="tns:IModelService_GetTranslationsFromBaseword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IModelService" type="tns:IModelService">
@@ -99,6 +109,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteBaseword">
       <soap:operation soapAction="http://tempuri.org/IModelService/DeleteBaseword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTranslationsFromBaseword">
+      <soap:operation soapAction="http://tempuri.org/IModelService/GetTranslationsFromBaseword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

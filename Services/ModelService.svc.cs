@@ -22,15 +22,12 @@ namespace Services
             int id;
             IQueryable<Baseword> basewords;
             basewords = Int32.TryParse(text, out id) ? 
-                _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Id == id).Take(20) : 
-                _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Text.StartsWith(text)).Take(20);
+                _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Id == id).OrderBy(b=>b.Text).Take(20):
+                _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Text.StartsWith(text)).OrderBy(b=>b.Text).Take(20);
             var resultList = new List<BasewordDto>();
             foreach (Baseword baseword in basewords)
             {
-                var languageDto = new LanguageDto {Id = baseword.LanguageId, Text = baseword.Language.EnglishName };
-                var wordtypeDto = new WordtypeDto {Id = baseword.WordtypeId, Text = baseword.Wordtype.Text};
-                var basewordDto = new BasewordDto {Id = baseword.Id, Text = baseword.Text, Language = languageDto, Wordtype = wordtypeDto, Comment = baseword.Comment, IsLocked = baseword.IsLocked.GetValueOrDefault()};
-                resultList.Add(basewordDto);
+                resultList.Add(CopyToBasewordDto(baseword));
             }
             return resultList;
         }
@@ -99,6 +96,32 @@ namespace Services
                 return true;
             }
             return false;
+        }
+
+        public IList<BasewordDto> GetTranslationsFromBaseword(BasewordDto basewordDto)
+        {
+            var resultList = new List<BasewordDto>();
+            var baseword = _context.Basewords1.Include("Translations").FirstOrDefault(b => b.Id == basewordDto.Id);
+            if (baseword != null)
+            {
+                // TODO Slow!! needs improvement
+                var basewords = from t in baseword.Translations
+                                join b in _context.Basewords1 on t.BasewordToId equals b.Id
+                                select b;
+                foreach (var basewordModel in basewords)
+                {
+                    resultList.Add(CopyToBasewordDto(basewordModel));
+                }
+            }
+            return resultList;
+        }
+
+        private BasewordDto CopyToBasewordDto(Baseword basewordModel)
+        {
+            var languageDto = new LanguageDto { Id = basewordModel.LanguageId, Text = basewordModel.Language.EnglishName };
+            var wordtypeDto = new WordtypeDto { Id = basewordModel.WordtypeId, Text = basewordModel.Wordtype.Text };
+            var basewordDto = new BasewordDto { Id = basewordModel.Id, Text = basewordModel.Text, Language = languageDto, Wordtype = wordtypeDto, Comment = basewordModel.Comment, IsLocked = basewordModel.IsLocked.GetValueOrDefault() };
+            return basewordDto;
         }
     }
 }

@@ -18,6 +18,23 @@ namespace Views.SL.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         #region Properties
+
+        private string _translationServiceText;
+
+        public string TranslationServiceText
+        {
+            get { return _translationServiceText; }
+            private set { SetPropertyValue(ref _translationServiceText, value, () => TranslationServiceText);}
+        }
+
+        private ObservableCollection<BasewordViewModel> _translations;
+ 
+        public ObservableCollection<BasewordViewModel> Translations
+        {
+            get { return _translations; }
+            private set { SetPropertyValue(ref _translations, value, () => Translations);}
+        } 
+
         private BasewordViewModel _selectedBaseword;
 
         public BasewordViewModel SelectedBaseword
@@ -30,6 +47,7 @@ namespace Views.SL.ViewModels
                     SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
                     UpdateBasewordCommand.UpdateCanExecute();
                     DeleteBasewordCommand.UpdateCanExecute();
+                    if (value!=null) UpdateTranslations();
                     ServiceMessage = string.Empty;
                 }
             }
@@ -85,12 +103,6 @@ namespace Views.SL.ViewModels
             }
         }
 
-        private void UpdateSearchedBasewords()
-        {
-            _client.GetBasewordsByTextOrIdAsync(SearchText);
-        }
-
-
         private string _serviceMessage;
 
         public string ServiceMessage
@@ -98,7 +110,20 @@ namespace Views.SL.ViewModels
             get { return _serviceMessage; }
             set { SetPropertyValue(ref _serviceMessage, value, () => ServiceMessage); }
         }
+
         #endregion
+
+        private void UpdateSearchedBasewords()
+        {
+            _client.GetBasewordsByTextOrIdAsync(SearchText);
+        }
+
+        private void UpdateTranslations()
+        {
+            Translations = new ObservableCollection<BasewordViewModel>();
+            TranslationServiceText = "Lade Übersetzungen ...";
+            _client.GetTranslationsFromBasewordAsync(SelectedBaseword.CopyToDto());
+        }
 
         private readonly ModelServiceClient _client;
 
@@ -114,6 +139,7 @@ namespace Views.SL.ViewModels
                 _client.GetSupportedLanguagesAsync();
                 _client.GetWordtypesAsync();
                 _client.DeleteBasewordCompleted += DeleteBasewordCompleted;
+                _client.GetTranslationsFromBasewordCompleted += GetTranslationsFromBasewordCompleted;
                 _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword());
                 _deleteBasewordCommand = new RelayCommand(param => this.DeleteBaseword(), param => this.CanDeleteBaseword());
             }
@@ -122,6 +148,15 @@ namespace Views.SL.ViewModels
 
 
         #region Callbacks
+        private void GetTranslationsFromBasewordCompleted(object sender, GetTranslationsFromBasewordCompletedEventArgs e)
+        {
+            foreach (var basewordDto in e.Result)
+            {
+                Translations.Add(new BasewordViewModel(basewordDto));
+            }
+            TranslationServiceText = "Laden der Übersetzungen beendet.";
+        }
+
         private void DeleteBasewordCompleted(object sender, DeleteBasewordCompletedEventArgs e)
         {
             ServiceMessage = e.Result ? "Baseword erfolgreich gelöscht!" : "Löschen des Basewords fehlgeschlagen";
