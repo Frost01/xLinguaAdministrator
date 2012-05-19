@@ -88,7 +88,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Übersetzungen"/>
-                <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Path=Translations}" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Path=Translations}" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True">
                     <sdk:DataGrid.Columns>
                         <sdk:DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
                         <sdk:DataGridTextColumn Header="Text" Binding="{Binding Path=Text}"/>
@@ -97,7 +97,6 @@
                 </sdk:DataGrid>
                 <TextBlock Grid.Row="2" Text="{Binding Path=TranslationServiceText}"/>
             </Grid>
-
         </Border>
      </Grid>
 </UserControl>

@@ -353,6 +353,10 @@
             <End Role="Flexion" EntitySet="Flexions" />
             <End Role="Connection" EntitySet="Connections1" />
           </AssociationSet>
+          <AssociationSet Name="BasewordTranslation" Association="xLingua_StagingModel.BasewordTranslation">
+            <End Role="Baseword" EntitySet="Basewords1" />
+            <End Role="Translation" EntitySet="Translations1" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Abbreviation">
           <Key>
@@ -384,6 +388,7 @@
           <NavigationProperty Name="Language" Relationship="xLingua_StagingModel.ref_languages" FromRole="basewords" ToRole="languages" />
           <NavigationProperty Name="Translations" Relationship="xLingua_StagingModel.ref_translation_basicword" FromRole="basewords" ToRole="translations" />
           <NavigationProperty Name="Wordtype" Relationship="xLingua_StagingModel.ref_types" FromRole="basewords" ToRole="types" />
+          <NavigationProperty Name="Translations_1" Relationship="xLingua_StagingModel.BasewordTranslation" FromRole="Baseword" ToRole="Translation" />
         </EntityType>
         <EntityType Name="Basewordspecific">
           <Key>
@@ -459,6 +464,7 @@
           <Property Name="BasewordToId" Type="Int32" Nullable="false" />
           <Property Name="Position" Type="Int32" />
           <NavigationProperty Name="Baseword" Relationship="xLingua_StagingModel.ref_translation_basicword" FromRole="translations" ToRole="basewords" />
+          <NavigationProperty Name="BasewordTranslation" Relationship="xLingua_StagingModel.BasewordTranslation" FromRole="Translation" ToRole="Baseword" />
         </EntityType>
         <EntityType Name="Wordtype">
           <Key>
@@ -615,6 +621,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="BasewordTranslation">
+          <End Type="xLingua_StagingModel.Baseword" Role="Baseword" Multiplicity="1" />
+          <End Type="xLingua_StagingModel.Translation" Role="Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Baseword">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="BasewordToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -734,7 +752,7 @@
           <ConnectorPoint PointX="5.125" PointY="1.4901432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="xLingua_StagingModel.ref_baseword" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.5625" PointY="4.7879036458333317" />
+          <ConnectorPoint PointX="3.5625" PointY="4.980205078125" />
           <ConnectorPoint PointX="3.5625" PointY="6.875" />
         </AssociationConnector>
         <AssociationConnector Association="xLingua_StagingModel.ref_languages" ManuallyRouted="false">
@@ -772,6 +790,13 @@
         <AssociationConnector Association="xLingua_StagingModel.FlexionConnection">
           <ConnectorPoint PointX="5.125" PointY="7.797841796875" />
           <ConnectorPoint PointX="4.25" PointY="7.797841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="xLingua_StagingModel.BasewordTranslation">
+          <ConnectorPoint PointX="4.328125" PointY="4.980205078125" />
+          <ConnectorPoint PointX="4.328125" PointY="5.695309374999999" />
+          <ConnectorPoint PointX="3.6458333333333335" PointY="5.6953093749999981" />
+          <ConnectorPoint PointX="3.4791666666666665" PointY="5.695309374999999" />
+          <ConnectorPoint PointX="2.125" PointY="5.695309374999999" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -104,10 +104,7 @@ namespace Services
             var baseword = _context.Basewords1.Include("Translations").FirstOrDefault(b => b.Id == basewordDto.Id);
             if (baseword != null)
             {
-                // TODO Slow!! needs improvement
-                var basewords = from t in baseword.Translations
-                                join b in _context.Basewords1 on t.BasewordToId equals b.Id
-                                select b;
+                var basewords = baseword.Translations.Select(t => t.BasewordTranslation);
                 foreach (var basewordModel in basewords)
                 {
                     resultList.Add(CopyToBasewordDto(basewordModel));

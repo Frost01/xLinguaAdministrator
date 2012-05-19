@@ -29,6 +29,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("xLingua_StagingModel", "ref_function_types", "types", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Models.EF.Wordtype), "functions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Gramfunction), true)]
 [assembly: EdmRelationshipAttribute("xLingua_StagingModel", "ref_functions_languages", "languages", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Models.EF.Language), "functions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Gramfunction), true)]
 [assembly: EdmRelationshipAttribute("xLingua_StagingModel", "FlexionConnection", "Flexion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Models.EF.Flexion), "Connection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Connection), true)]
+[assembly: EdmRelationshipAttribute("xLingua_StagingModel", "BasewordTranslation", "Baseword", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Models.EF.Baseword), "Translation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Models.EF.Translation), true)]
 
 #endregion
 
@@ -962,6 +963,28 @@ namespace Models.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Wordtype>("xLingua_StagingModel.ref_types", "types", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "BasewordTranslation", "Translation")]
+        public EntityCollection<Translation> Translations_1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Translation>("xLingua_StagingModel.BasewordTranslation", "Translation");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Translation>("xLingua_StagingModel.BasewordTranslation", "Translation", value);
                 }
             }
         }
@@ -2392,6 +2415,44 @@ namespace Models.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Baseword>("xLingua_StagingModel.ref_translation_basicword", "basewords", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("xLingua_StagingModel", "BasewordTranslation", "Baseword")]
+        public Baseword BasewordTranslation
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Baseword>("xLingua_StagingModel.BasewordTranslation", "Baseword").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Baseword>("xLingua_StagingModel.BasewordTranslation", "Baseword").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Baseword> BasewordTranslationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Baseword>("xLingua_StagingModel.BasewordTranslation", "Baseword");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Baseword>("xLingua_StagingModel.BasewordTranslation", "Baseword", value);
                 }
             }
         }
