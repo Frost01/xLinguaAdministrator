@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\temp\xLinguaAdmin" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="ClientBin/Views.SL.xap" publishTime="05/19/2012 16:32:24" />
+    <file relUrl="bin/Models.EF.pdb" publishTime="05/19/2012 16:15:55" />
+    <file relUrl="index.html" publishTime="05/05/2012 19:56:47" />
+    <file relUrl="Web.config" publishTime="05/19/2012 16:33:58" />
+    <file relUrl="Silverlight.js" publishTime="05/05/2012 19:56:54" />
+    <file relUrl="bin/Views.SL.Web.pdb" publishTime="05/19/2012 16:32:23" />
+    <file relUrl="bin/Views.SL.Web.dll" publishTime="05/19/2012 16:32:23" />
+    <file relUrl="Views.SLTestPage.aspx" publishTime="05/05/2012 19:56:48" />
+    <file relUrl="bin/Models.EF.dll" publishTime="05/19/2012 16:15:55" />
+  </publishProfile>
+</publishData>

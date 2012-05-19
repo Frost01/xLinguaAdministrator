@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\temp\xLinguaAdminService" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="ModelService.svc" publishTime="05/18/2012 14:47:30" />
+    <file relUrl="bin/Services.dll" publishTime="05/19/2012 15:38:16" />
+    <file relUrl="bin/Models.EF.pdb" publishTime="05/12/2012 20:34:10" />
+    <file relUrl="bin/Services.pdb" publishTime="05/19/2012 15:38:16" />
+    <file relUrl="Web.config" publishTime="05/19/2012 15:58:14" />
+    <file relUrl="CrossDomain.xml" publishTime="05/19/2012 07:54:47" />
+    <file relUrl="bin/DTO.dll" publishTime="05/19/2012 08:25:50" />
+    <file relUrl="bin/DTO.pdb" publishTime="05/19/2012 08:25:50" />
+    <file relUrl="bin/Models.EF.dll" publishTime="05/12/2012 20:34:10" />
+  </publishProfile>
+</publishData>

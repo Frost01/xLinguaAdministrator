@@ -88,7 +88,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ModelService\Reference.cs">
+    <Compile Include="Service References\ModelServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -113,24 +113,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Service References\ModelService\ModelService.wsdl" />
-    <None Include="Service References\ModelService\ModelService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ModelService\ModelService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ModelService\ModelService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ModelService\Views.SL.ModelService.BasewordDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Service References\ModelServiceReference\ModelService.disco" />
+    <None Include="Service References\ModelServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ModelServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ModelServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
-    <None Include="Service References\ModelService\Views.SL.ModelService.LanguageDto.datasource">
+    <None Include="Service References\ModelServiceReference\ModelService.wsdl" />
+    <None Include="Service References\ModelServiceReference\ModelService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\ModelService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\ModelService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\Views.SL.ModelServiceReference.BasewordDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ModelService\Views.SL.ModelService.WordtypeDto.datasource">
+    <None Include="Service References\ModelServiceReference\Views.SL.ModelServiceReference.LanguageDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ModelServiceReference\Views.SL.ModelServiceReference.WordtypeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
@@ -138,22 +145,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ModelService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ModelService\ModelService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ModelService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ModelService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ModelService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <WCFMetadataStorage Include="Service References\ModelServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
