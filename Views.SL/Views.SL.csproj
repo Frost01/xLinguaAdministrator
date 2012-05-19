@@ -88,6 +88,11 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ModelService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BasewordViewModel.cs" />
@@ -108,6 +113,41 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
+    <None Include="Service References\ModelService\ModelService.wsdl" />
+    <None Include="Service References\ModelService\ModelService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelService\ModelService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelService\ModelService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelService\Views.SL.ModelService.BasewordDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ModelService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ModelService\ModelService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ModelService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ModelService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ModelService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

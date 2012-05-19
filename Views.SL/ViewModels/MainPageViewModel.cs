@@ -11,8 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Models.EF;
-using Views.SL.Web.xLinguaService;
+using Views.SL.ModelService;
 
 namespace Views.SL.ViewModels
 {
@@ -71,50 +70,31 @@ namespace Views.SL.ViewModels
 
         private void UpdateSearchedBasewords()
         {
-            var basewordContext = new BasewordContext();
-            basewordContext.Load(basewordContext.GetBasewordByTextQuery(SearchText), SearchedBasewordsLoadOpCallback,null);
+            _client.GetBasewordsByTextAsync(SearchText);
         }
 
-        private void SearchedBasewordsLoadOpCallback(LoadOperation<Baseword> loadOperation )
-        {
-            SearchedBasewords = new ObservableCollection<BasewordViewModel>();
-            foreach (var entity in loadOperation.AllEntities)
-            {
-               SearchedBasewords.Add(new BasewordViewModel(entity));
-            }
-        }
+        private ModelServiceClient _client;
 
         public MainPageViewModel()
         {
             if (!DesignerProperties.IsInDesignTool)
             {
-                var languageContext = new LanguageContext();
-                languageContext.Load(languageContext.GetLanguagesQuery(), LoadOpLanguageCallback, null);
-                var wordtypeContext = new WordtypeContext();
-                wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), LoadOpWordtypeCallback, null);
+                _client = new ModelServiceClient();
+                _client.GetBasewordsByTextCompleted += new EventHandler<GetBasewordsByTextCompletedEventArgs>(GetBasewordsByTextCompleted);
                 _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword());
             }
         }
 
-        private void LoadOpLanguageCallback(LoadOperation<Language> loadOperation)
+        void GetBasewordsByTextCompleted(object sender, GetBasewordsByTextCompletedEventArgs e)
         {
-            Languages = new ObservableCollection<LanguageViewModel>();
-            var loadedLanguages = loadOperation.AllEntities;
-            foreach (var language in loadedLanguages)
+            var basewordDtos = e.Result;
+            SearchedBasewords = new ObservableCollection<BasewordViewModel>();
+            foreach (BasewordDto basewordDto in basewordDtos)
             {
-                Languages.Add(new LanguageViewModel(language));
+                SearchedBasewords.Add(new BasewordViewModel(basewordDto));
             }
         }
 
-        private void LoadOpWordtypeCallback(LoadOperation<Wordtype> loadOperation )
-        {
-            Wordtypes = new ObservableCollection<WordtypeViewModel>();
-            var loadedWordtypes = loadOperation.AllEntities;
-            foreach (var wordtype in loadedWordtypes)
-            {
-                Wordtypes.Add(new WordtypeViewModel(wordtype));
-            }
-        }
 
         private RelayCommand _updateBasewordCommand;
 
@@ -125,7 +105,7 @@ namespace Views.SL.ViewModels
 
         private void UpdateBaseword()
         {
-            SelectedBaseword.Update();
+  
         }
 
         private bool CanUpdateBaseword()

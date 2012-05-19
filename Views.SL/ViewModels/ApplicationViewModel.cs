@@ -12,8 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Models.EF;
-using Views.SL.Web.xLinguaService;
 using System.Collections.Generic;
 
 namespace Views.SL.ViewModels
@@ -53,23 +51,14 @@ namespace Views.SL.ViewModels
             }
             if (!DesignerProperties.IsInDesignTool)
             {
-                var languageContext = new LanguageContext();
-                languageContext.Load(languageContext.GetLanguagesQuery(), LanguageLoadOpCallback, null);
-                var wordtypeContext = new WordtypeContext();
-                wordtypeContext.Load(wordtypeContext.GetWordtypesQuery(), WordtypeLoadOpCallback, null);
+
             }
         }
 
         public static ApplicationViewModel Instance { get; private set; }
 
-        private void LanguageLoadOpCallback(LoadOperation<Language> loadOperation )
-        {
-            _languages = loadOperation.AllEntities.Select(entity => new LanguageViewModel(entity)).ToList();
-        }
 
-        private void WordtypeLoadOpCallback(LoadOperation<Wordtype> loadOperation )
-        {
-            _wordtypes = loadOperation.AllEntities.Select(entity => new WordtypeViewModel(entity)).ToList();
-        }
+
+
     }
 }

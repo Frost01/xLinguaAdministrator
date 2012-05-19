@@ -9,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Models.EF;
 
 namespace Views.SL.ViewModels
 {
@@ -31,15 +30,6 @@ namespace Views.SL.ViewModels
             set {SetPropertyValue(ref _text, value, () => Text);}
         }
 
-        public WordtypeViewModel(Wordtype wordtype)
-        {
-            Id = wordtype.Id;
-            Text = wordtype.Text;
-        }
 
-        public WordtypeViewModel(Entity wordtype):this(wordtype as Wordtype)
-        {
-            
-        }
     }
 }

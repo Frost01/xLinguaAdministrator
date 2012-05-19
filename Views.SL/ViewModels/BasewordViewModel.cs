@@ -10,8 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Models.EF;
-using Views.SL.Web.xLinguaService;
+using Views.SL.ModelService;
 
 namespace Views.SL.ViewModels
 {
@@ -67,35 +66,14 @@ namespace Views.SL.ViewModels
             set { SetPropertyValue(ref _status, value, () => Status);}
         }
 
-        public BasewordViewModel(Baseword baseword)
+        public BasewordViewModel(BasewordDto basewordDto)
         {
-            Id = baseword.Id;
-            Text = baseword.Text;
-            Language = ApplicationViewModel.Instance.GetLanguageById(baseword.LanguageId);
-            Wordtype = ApplicationViewModel.Instance.GetWordtypeById(baseword.WordtypeId);
-            Comment = baseword.Comment;
-            IsLocked = baseword.IsLocked.GetValueOrDefault();
+            Id = basewordDto.Id;
+            Text = basewordDto.Text;
+            Language = new LanguageViewModel(basewordDto.Language);
         }
 
-        public BasewordViewModel(Entity baseword):this(baseword as Baseword){}
 
 
-        internal void Update()
-        {
-            var context = new BasewordContext();
-            var baseword = (from b in context.Basewords
-                            where b.Id == Id
-                            select b).SingleOrDefault();
-            if (baseword != null)
-            {
-                baseword.Text = this.Text;
-                baseword.LanguageId = this.Language.Id;
-                baseword.WordtypeId = this.Wordtype.Id;
-                baseword.Comment = this.Comment;
-                baseword.IsLocked = this.IsLocked;
-                context.SubmitChanges();
-            }
-
-        }
     }
 }

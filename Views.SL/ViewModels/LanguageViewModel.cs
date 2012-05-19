@@ -9,8 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Models.EF;
-using Views.SL.Web.xLinguaService;
+using Views.SL.ModelService;
 
 namespace Views.SL.ViewModels
 {
@@ -32,14 +31,11 @@ namespace Views.SL.ViewModels
             set {SetPropertyValue(ref _text, value, () => Text);}
         }
 
-        public LanguageViewModel(Language languageEntity)
+        public LanguageViewModel(LanguageDto languageDto)
         {
-            Id = languageEntity.Id;
-            Text = languageEntity.EnglishName;
+            Id = languageDto.Id;
+            Text = languageDto.Text;
         }
 
-        public LanguageViewModel(Entity languageEntity):this(languageEntity as Language)
-        {
-        }
     } 
 }
