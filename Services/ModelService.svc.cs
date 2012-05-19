@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -16,10 +17,14 @@ namespace Services
     {
         readonly xLingua_StagingEntities _context = new xLingua_StagingEntities();
 
-        public IList<BasewordDto> GetBasewordsByText(string text)
+        public IList<BasewordDto> GetBasewordsByTextOrId(string text)
         {
+            int id;
+            IQueryable<Baseword> basewords;
+            basewords = Int32.TryParse(text, out id) ? 
+                _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Id == id).Take(20) : 
+                _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Text.StartsWith(text)).Take(20);
             var resultList = new List<BasewordDto>();
-            var basewords = _context.Basewords1.Include("Language").Include("Wordtype").Where(b => b.Text.StartsWith(text)).Take(20);
             foreach (Baseword baseword in basewords)
             {
                 var languageDto = new LanguageDto {Id = baseword.LanguageId, Text = baseword.Language.EnglishName };

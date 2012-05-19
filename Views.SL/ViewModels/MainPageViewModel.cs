@@ -70,7 +70,7 @@ namespace Views.SL.ViewModels
 
         private void UpdateSearchedBasewords()
         {
-            _client.GetBasewordsByTextAsync(SearchText);
+            _client.GetBasewordsByTextOrIdAsync(SearchText);
         }
 
         private readonly ModelServiceClient _client;
@@ -88,7 +88,7 @@ namespace Views.SL.ViewModels
             if (!DesignerProperties.IsInDesignTool)
             {
                 _client = new ModelServiceClient();
-                _client.GetBasewordsByTextCompleted += new EventHandler<GetBasewordsByTextCompletedEventArgs>(GetBasewordsByTextCompleted);
+                _client.GetBasewordsByTextOrIdCompleted += GetBasewordsByTextOrIdCompleted;
                 _client.GetSupportedLanguagesCompleted += GetSupportedLanguagesCompleted;
                 _client.GetWordtypesCompleted += GetWordtypesCompleted;
                 _client.UpdateBasewordCompleted += UpdateBasewordCompleted;
@@ -123,7 +123,7 @@ namespace Views.SL.ViewModels
             }
         }
 
-        void GetBasewordsByTextCompleted(object sender, GetBasewordsByTextCompletedEventArgs e)
+        void GetBasewordsByTextOrIdCompleted(object sender, GetBasewordsByTextOrIdCompletedEventArgs e)
         {
             var basewordDtos = e.Result;
             SearchedBasewords = new ObservableCollection<BasewordViewModel>();

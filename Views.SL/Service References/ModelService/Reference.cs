@@ -214,10 +214,10 @@ namespace Views.SL.ModelService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ModelService.IModelService")]
     public interface IModelService {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/GetBasewordsByText", ReplyAction="http://tempuri.org/IModelService/GetBasewordsByTextResponse")]
-        System.IAsyncResult BeginGetBasewordsByText(string text, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/GetBasewordsByTextOrId", ReplyAction="http://tempuri.org/IModelService/GetBasewordsByTextOrIdResponse")]
+        System.IAsyncResult BeginGetBasewordsByTextOrId(string text, System.AsyncCallback callback, object asyncState);
         
-        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> EndGetBasewordsByText(System.IAsyncResult result);
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> EndGetBasewordsByTextOrId(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/GetSupportedLanguages", ReplyAction="http://tempuri.org/IModelService/GetSupportedLanguagesResponse")]
         System.IAsyncResult BeginGetSupportedLanguages(System.AsyncCallback callback, object asyncState);
@@ -241,11 +241,11 @@ namespace Views.SL.ModelService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetBasewordsByTextCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetBasewordsByTextOrIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public GetBasewordsByTextCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public GetBasewordsByTextOrIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -319,11 +319,11 @@ namespace Views.SL.ModelService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ModelServiceClient : System.ServiceModel.ClientBase<Views.SL.ModelService.IModelService>, Views.SL.ModelService.IModelService {
         
-        private BeginOperationDelegate onBeginGetBasewordsByTextDelegate;
+        private BeginOperationDelegate onBeginGetBasewordsByTextOrIdDelegate;
         
-        private EndOperationDelegate onEndGetBasewordsByTextDelegate;
+        private EndOperationDelegate onEndGetBasewordsByTextOrIdDelegate;
         
-        private System.Threading.SendOrPostCallback onGetBasewordsByTextCompletedDelegate;
+        private System.Threading.SendOrPostCallback onGetBasewordsByTextOrIdCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetSupportedLanguagesDelegate;
         
@@ -396,7 +396,7 @@ namespace Views.SL.ModelService {
             }
         }
         
-        public event System.EventHandler<GetBasewordsByTextCompletedEventArgs> GetBasewordsByTextCompleted;
+        public event System.EventHandler<GetBasewordsByTextOrIdCompletedEventArgs> GetBasewordsByTextOrIdCompleted;
         
         public event System.EventHandler<GetSupportedLanguagesCompletedEventArgs> GetSupportedLanguagesCompleted;
         
@@ -409,49 +409,49 @@ namespace Views.SL.ModelService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Views.SL.ModelService.IModelService.BeginGetBasewordsByText(string text, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetBasewordsByText(text, callback, asyncState);
+        System.IAsyncResult Views.SL.ModelService.IModelService.BeginGetBasewordsByTextOrId(string text, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetBasewordsByTextOrId(text, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> Views.SL.ModelService.IModelService.EndGetBasewordsByText(System.IAsyncResult result) {
-            return base.Channel.EndGetBasewordsByText(result);
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> Views.SL.ModelService.IModelService.EndGetBasewordsByTextOrId(System.IAsyncResult result) {
+            return base.Channel.EndGetBasewordsByTextOrId(result);
         }
         
-        private System.IAsyncResult OnBeginGetBasewordsByText(object[] inValues, System.AsyncCallback callback, object asyncState) {
+        private System.IAsyncResult OnBeginGetBasewordsByTextOrId(object[] inValues, System.AsyncCallback callback, object asyncState) {
             string text = ((string)(inValues[0]));
-            return ((Views.SL.ModelService.IModelService)(this)).BeginGetBasewordsByText(text, callback, asyncState);
+            return ((Views.SL.ModelService.IModelService)(this)).BeginGetBasewordsByTextOrId(text, callback, asyncState);
         }
         
-        private object[] OnEndGetBasewordsByText(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> retVal = ((Views.SL.ModelService.IModelService)(this)).EndGetBasewordsByText(result);
+        private object[] OnEndGetBasewordsByTextOrId(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> retVal = ((Views.SL.ModelService.IModelService)(this)).EndGetBasewordsByTextOrId(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnGetBasewordsByTextCompleted(object state) {
-            if ((this.GetBasewordsByTextCompleted != null)) {
+        private void OnGetBasewordsByTextOrIdCompleted(object state) {
+            if ((this.GetBasewordsByTextOrIdCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetBasewordsByTextCompleted(this, new GetBasewordsByTextCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.GetBasewordsByTextOrIdCompleted(this, new GetBasewordsByTextOrIdCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void GetBasewordsByTextAsync(string text) {
-            this.GetBasewordsByTextAsync(text, null);
+        public void GetBasewordsByTextOrIdAsync(string text) {
+            this.GetBasewordsByTextOrIdAsync(text, null);
         }
         
-        public void GetBasewordsByTextAsync(string text, object userState) {
-            if ((this.onBeginGetBasewordsByTextDelegate == null)) {
-                this.onBeginGetBasewordsByTextDelegate = new BeginOperationDelegate(this.OnBeginGetBasewordsByText);
+        public void GetBasewordsByTextOrIdAsync(string text, object userState) {
+            if ((this.onBeginGetBasewordsByTextOrIdDelegate == null)) {
+                this.onBeginGetBasewordsByTextOrIdDelegate = new BeginOperationDelegate(this.OnBeginGetBasewordsByTextOrId);
             }
-            if ((this.onEndGetBasewordsByTextDelegate == null)) {
-                this.onEndGetBasewordsByTextDelegate = new EndOperationDelegate(this.OnEndGetBasewordsByText);
+            if ((this.onEndGetBasewordsByTextOrIdDelegate == null)) {
+                this.onEndGetBasewordsByTextOrIdDelegate = new EndOperationDelegate(this.OnEndGetBasewordsByTextOrId);
             }
-            if ((this.onGetBasewordsByTextCompletedDelegate == null)) {
-                this.onGetBasewordsByTextCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetBasewordsByTextCompleted);
+            if ((this.onGetBasewordsByTextOrIdCompletedDelegate == null)) {
+                this.onGetBasewordsByTextOrIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetBasewordsByTextOrIdCompleted);
             }
-            base.InvokeAsync(this.onBeginGetBasewordsByTextDelegate, new object[] {
-                        text}, this.onEndGetBasewordsByTextDelegate, this.onGetBasewordsByTextCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginGetBasewordsByTextOrIdDelegate, new object[] {
+                        text}, this.onEndGetBasewordsByTextOrIdDelegate, this.onGetBasewordsByTextOrIdCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -664,16 +664,16 @@ namespace Views.SL.ModelService {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginGetBasewordsByText(string text, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginGetBasewordsByTextOrId(string text, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = text;
-                System.IAsyncResult _result = base.BeginInvoke("GetBasewordsByText", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("GetBasewordsByTextOrId", _args, callback, asyncState);
                 return _result;
             }
             
-            public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> EndGetBasewordsByText(System.IAsyncResult result) {
+            public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> EndGetBasewordsByTextOrId(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto>)(base.EndInvoke("GetBasewordsByText", _args, result)));
+                System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto>)(base.EndInvoke("GetBasewordsByTextOrId", _args, result)));
                 return _result;
             }
             

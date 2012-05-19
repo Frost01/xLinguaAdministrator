@@ -7,11 +7,11 @@
       <xsd:import schemaLocation="http://localhost:49166/ModelService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DTO" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IModelService_GetBasewordsByText_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetBasewordsByText" />
+  <wsdl:message name="IModelService_GetBasewordsByTextOrId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBasewordsByTextOrId" />
   </wsdl:message>
-  <wsdl:message name="IModelService_GetBasewordsByText_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetBasewordsByTextResponse" />
+  <wsdl:message name="IModelService_GetBasewordsByTextOrId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBasewordsByTextOrIdResponse" />
   </wsdl:message>
   <wsdl:message name="IModelService_GetSupportedLanguages_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSupportedLanguages" />
@@ -32,9 +32,9 @@
     <wsdl:part name="parameters" element="tns:UpdateBasewordResponse" />
   </wsdl:message>
   <wsdl:portType name="IModelService">
-    <wsdl:operation name="GetBasewordsByText">
-      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByText" message="tns:IModelService_GetBasewordsByText_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByTextResponse" message="tns:IModelService_GetBasewordsByText_OutputMessage" />
+    <wsdl:operation name="GetBasewordsByTextOrId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByTextOrId" message="tns:IModelService_GetBasewordsByTextOrId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByTextOrIdResponse" message="tns:IModelService_GetBasewordsByTextOrId_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSupportedLanguages">
       <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetSupportedLanguages" message="tns:IModelService_GetSupportedLanguages_InputMessage" />
@@ -51,8 +51,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IModelService" type="tns:IModelService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetBasewordsByText">
-      <soap:operation soapAction="http://tempuri.org/IModelService/GetBasewordsByText" style="document" />
+    <wsdl:operation name="GetBasewordsByTextOrId">
+      <soap:operation soapAction="http://tempuri.org/IModelService/GetBasewordsByTextOrId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -14,7 +14,7 @@ namespace Services
     public interface IModelService
     {
         [OperationContract]
-        IList<BasewordDto> GetBasewordsByText(string text);
+        IList<BasewordDto> GetBasewordsByTextOrId(string text);
 
         [OperationContract]
         IList<LanguageDto> GetSupportedLanguages();
