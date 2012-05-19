@@ -71,9 +71,32 @@ namespace Views.SL.ViewModels
             Id = basewordDto.Id;
             Text = basewordDto.Text;
             Language = new LanguageViewModel(basewordDto.Language);
+            Wordtype = new WordtypeViewModel(basewordDto.Wordtype);
+            Comment = basewordDto.Comment;
+            IsLocked = basewordDto.IsLocked;
         }
 
-
+        public BasewordDto CopyToDto()
+        {
+            var basewordDto = new BasewordDto
+            {
+                Id = this.Id,
+                Text = this.Text,
+                Language = new LanguageDto
+                {
+                    Id = this.Language.Id,
+                    Text = this.Language.Text
+                },
+                Wordtype = new WordtypeDto
+                {
+                    Id = this.Wordtype.Id,
+                    Text = this.Wordtype.Text
+                },
+                Comment = this.Comment,
+                IsLocked = this.IsLocked
+            };
+            return basewordDto;
+        }
 
     }
 }

@@ -127,6 +127,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\ModelService\Views.SL.ModelService.LanguageDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ModelService\Views.SL.ModelService.WordtypeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -13,16 +13,73 @@
   <wsdl:message name="IModelService_GetBasewordsByText_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetBasewordsByTextResponse" />
   </wsdl:message>
+  <wsdl:message name="IModelService_GetSupportedLanguages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSupportedLanguages" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetSupportedLanguages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSupportedLanguagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetWordtypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordtypes" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetWordtypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordtypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_UpdateBaseword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBaseword" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_UpdateBaseword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBasewordResponse" />
+  </wsdl:message>
   <wsdl:portType name="IModelService">
     <wsdl:operation name="GetBasewordsByText">
       <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByText" message="tns:IModelService_GetBasewordsByText_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByTextResponse" message="tns:IModelService_GetBasewordsByText_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedLanguages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetSupportedLanguages" message="tns:IModelService_GetSupportedLanguages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetSupportedLanguagesResponse" message="tns:IModelService_GetSupportedLanguages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWordtypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetWordtypes" message="tns:IModelService_GetWordtypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetWordtypesResponse" message="tns:IModelService_GetWordtypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBaseword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/UpdateBaseword" message="tns:IModelService_UpdateBaseword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/UpdateBasewordResponse" message="tns:IModelService_UpdateBaseword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IModelService" type="tns:IModelService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetBasewordsByText">
       <soap:operation soapAction="http://tempuri.org/IModelService/GetBasewordsByText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSupportedLanguages">
+      <soap:operation soapAction="http://tempuri.org/IModelService/GetSupportedLanguages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWordtypes">
+      <soap:operation soapAction="http://tempuri.org/IModelService/GetWordtypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBaseword">
+      <soap:operation soapAction="http://tempuri.org/IModelService/UpdateBaseword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

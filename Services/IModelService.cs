@@ -16,5 +16,13 @@ namespace Services
         [OperationContract]
         IList<BasewordDto> GetBasewordsByText(string text);
 
+        [OperationContract]
+        IList<LanguageDto> GetSupportedLanguages();
+
+        [OperationContract]
+        IList<WordtypeDto> GetWordtypes();
+
+        [OperationContract]
+        bool UpdateBaseword(BasewordDto baseword);
     }
 }

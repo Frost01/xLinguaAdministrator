@@ -24,10 +24,52 @@ namespace Services
             {
                 var languageDto = new LanguageDto {Id = baseword.LanguageId, Text = baseword.Language.EnglishName };
                 var wordtypeDto = new WordtypeDto {Id = baseword.WordtypeId, Text = baseword.Wordtype.Text};
-                var basewordDto = new BasewordDto {Id = baseword.Id, Text = baseword.Text, Language = languageDto, Wordtype = wordtypeDto};
+                var basewordDto = new BasewordDto {Id = baseword.Id, Text = baseword.Text, Language = languageDto, Wordtype = wordtypeDto, Comment = baseword.Comment, IsLocked = baseword.IsLocked.GetValueOrDefault()};
                 resultList.Add(basewordDto);
             }
             return resultList;
+        }
+
+        public IList<LanguageDto> GetSupportedLanguages()
+        {
+            var resultList = new List<LanguageDto>();
+            foreach (Language language in _context.Languages1)
+            {
+                var languageDto = new LanguageDto();
+                languageDto.Id = language.Id;
+                languageDto.Text = language.EnglishName;
+                resultList.Add(languageDto);
+            }
+            return resultList;
+        }
+
+        public IList<WordtypeDto> GetWordtypes()
+        {
+            var resultList = new List<WordtypeDto>();
+            foreach (Wordtype wordtype in _context.Wordtypes)
+            {
+                var wordtypeDto = new WordtypeDto();
+                wordtypeDto.Id = wordtype.Id;
+                wordtypeDto.Text = wordtype.Text;
+                resultList.Add(wordtypeDto);
+            }
+            return resultList;
+        }
+
+        public bool UpdateBaseword(BasewordDto basewordDto)
+        {
+            var baseword = _context.Basewords1.FirstOrDefault(b => b.Id == basewordDto.Id);
+            if (baseword != null)
+            {
+                baseword.Text = basewordDto.Text;
+                baseword.LanguageId = basewordDto.Language.Id;
+                baseword.WordtypeId = basewordDto.Wordtype.Id;
+                baseword.Comment = basewordDto.Comment;
+                baseword.IsLocked = basewordDto.IsLocked;
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

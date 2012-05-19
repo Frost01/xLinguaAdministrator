@@ -81,7 +81,31 @@ namespace Views.SL.ViewModels
             {
                 _client = new ModelServiceClient();
                 _client.GetBasewordsByTextCompleted += new EventHandler<GetBasewordsByTextCompletedEventArgs>(GetBasewordsByTextCompleted);
+                _client.GetSupportedLanguagesCompleted += GetSupportedLanguagesCompleted;
+                _client.GetWordtypesCompleted += GetWordtypesCompleted;
+                _client.GetSupportedLanguagesAsync();
+                _client.GetWordtypesAsync();
                 _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword());
+            }
+        }
+
+        private void GetWordtypesCompleted(object sender, GetWordtypesCompletedEventArgs e)
+        {
+            var wordtypes = e.Result;
+            Wordtypes = new ObservableCollection<WordtypeViewModel>();
+            foreach (WordtypeDto wordtypeDto in wordtypes)
+            {
+                Wordtypes.Add(new WordtypeViewModel(wordtypeDto));
+            }
+        }
+
+        private void GetSupportedLanguagesCompleted(object sender, GetSupportedLanguagesCompletedEventArgs e)
+        {
+            var languages = e.Result;
+            Languages = new ObservableCollection<LanguageViewModel>();
+            foreach (LanguageDto languageDto in languages)
+            {
+                Languages.Add(new LanguageViewModel(languageDto));
             }
         }
 
@@ -105,7 +129,7 @@ namespace Views.SL.ViewModels
 
         private void UpdateBaseword()
         {
-  
+            _client.UpdateBasewordAsync(SelectedBaseword.CopyToDto());
         }
 
         private bool CanUpdateBaseword()

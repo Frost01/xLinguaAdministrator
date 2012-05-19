@@ -17,5 +17,9 @@ namespace DTO
         public LanguageDto Language { get; set; }
         [DataMember]
         public WordtypeDto Wordtype { get; set; }
+        [DataMember]
+        public string Comment { get; set; }
+        [DataMember]
+        public bool IsLocked { get; set; }
     }
 }

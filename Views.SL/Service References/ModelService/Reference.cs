@@ -20,11 +20,30 @@ namespace Views.SL.ModelService {
     [System.Runtime.Serialization.DataContractAttribute(Name="BasewordDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
     public partial class BasewordDto : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private string CommentField;
+        
         private int IdField;
+        
+        private bool IsLockedField;
         
         private Views.SL.ModelService.LanguageDto LanguageField;
         
         private string TextField;
+        
+        private Views.SL.ModelService.WordtypeDto WordtypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Comment {
+            get {
+                return this.CommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CommentField, value) != true)) {
+                    this.CommentField = value;
+                    this.RaisePropertyChanged("Comment");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
@@ -35,6 +54,19 @@ namespace Views.SL.ModelService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsLocked {
+            get {
+                return this.IsLockedField;
+            }
+            set {
+                if ((this.IsLockedField.Equals(value) != true)) {
+                    this.IsLockedField = value;
+                    this.RaisePropertyChanged("IsLocked");
                 }
             }
         }
@@ -61,6 +93,19 @@ namespace Views.SL.ModelService {
                 if ((object.ReferenceEquals(this.TextField, value) != true)) {
                     this.TextField = value;
                     this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Views.SL.ModelService.WordtypeDto Wordtype {
+            get {
+                return this.WordtypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WordtypeField, value) != true)) {
+                    this.WordtypeField = value;
+                    this.RaisePropertyChanged("Wordtype");
                 }
             }
         }
@@ -120,6 +165,51 @@ namespace Views.SL.ModelService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WordtypeDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
+    public partial class WordtypeDto : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int IdField;
+        
+        private string TextField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ModelService.IModelService")]
     public interface IModelService {
@@ -128,6 +218,21 @@ namespace Views.SL.ModelService {
         System.IAsyncResult BeginGetBasewordsByText(string text, System.AsyncCallback callback, object asyncState);
         
         System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> EndGetBasewordsByText(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/GetSupportedLanguages", ReplyAction="http://tempuri.org/IModelService/GetSupportedLanguagesResponse")]
+        System.IAsyncResult BeginGetSupportedLanguages(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto> EndGetSupportedLanguages(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/GetWordtypes", ReplyAction="http://tempuri.org/IModelService/GetWordtypesResponse")]
+        System.IAsyncResult BeginGetWordtypes(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto> EndGetWordtypes(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/UpdateBaseword", ReplyAction="http://tempuri.org/IModelService/UpdateBasewordResponse")]
+        System.IAsyncResult BeginUpdateBaseword(Views.SL.ModelService.BasewordDto baseword, System.AsyncCallback callback, object asyncState);
+        
+        bool EndUpdateBaseword(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -155,6 +260,63 @@ namespace Views.SL.ModelService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetSupportedLanguagesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetSupportedLanguagesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetWordtypesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetWordtypesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UpdateBasewordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public UpdateBasewordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ModelServiceClient : System.ServiceModel.ClientBase<Views.SL.ModelService.IModelService>, Views.SL.ModelService.IModelService {
         
         private BeginOperationDelegate onBeginGetBasewordsByTextDelegate;
@@ -162,6 +324,24 @@ namespace Views.SL.ModelService {
         private EndOperationDelegate onEndGetBasewordsByTextDelegate;
         
         private System.Threading.SendOrPostCallback onGetBasewordsByTextCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetSupportedLanguagesDelegate;
+        
+        private EndOperationDelegate onEndGetSupportedLanguagesDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetSupportedLanguagesCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetWordtypesDelegate;
+        
+        private EndOperationDelegate onEndGetWordtypesDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetWordtypesCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginUpdateBasewordDelegate;
+        
+        private EndOperationDelegate onEndUpdateBasewordDelegate;
+        
+        private System.Threading.SendOrPostCallback onUpdateBasewordCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -218,6 +398,12 @@ namespace Views.SL.ModelService {
         
         public event System.EventHandler<GetBasewordsByTextCompletedEventArgs> GetBasewordsByTextCompleted;
         
+        public event System.EventHandler<GetSupportedLanguagesCompletedEventArgs> GetSupportedLanguagesCompleted;
+        
+        public event System.EventHandler<GetWordtypesCompletedEventArgs> GetWordtypesCompleted;
+        
+        public event System.EventHandler<UpdateBasewordCompletedEventArgs> UpdateBasewordCompleted;
+        
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
@@ -266,6 +452,140 @@ namespace Views.SL.ModelService {
             }
             base.InvokeAsync(this.onBeginGetBasewordsByTextDelegate, new object[] {
                         text}, this.onEndGetBasewordsByTextDelegate, this.onGetBasewordsByTextCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Views.SL.ModelService.IModelService.BeginGetSupportedLanguages(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetSupportedLanguages(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto> Views.SL.ModelService.IModelService.EndGetSupportedLanguages(System.IAsyncResult result) {
+            return base.Channel.EndGetSupportedLanguages(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetSupportedLanguages(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((Views.SL.ModelService.IModelService)(this)).BeginGetSupportedLanguages(callback, asyncState);
+        }
+        
+        private object[] OnEndGetSupportedLanguages(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto> retVal = ((Views.SL.ModelService.IModelService)(this)).EndGetSupportedLanguages(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetSupportedLanguagesCompleted(object state) {
+            if ((this.GetSupportedLanguagesCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetSupportedLanguagesCompleted(this, new GetSupportedLanguagesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetSupportedLanguagesAsync() {
+            this.GetSupportedLanguagesAsync(null);
+        }
+        
+        public void GetSupportedLanguagesAsync(object userState) {
+            if ((this.onBeginGetSupportedLanguagesDelegate == null)) {
+                this.onBeginGetSupportedLanguagesDelegate = new BeginOperationDelegate(this.OnBeginGetSupportedLanguages);
+            }
+            if ((this.onEndGetSupportedLanguagesDelegate == null)) {
+                this.onEndGetSupportedLanguagesDelegate = new EndOperationDelegate(this.OnEndGetSupportedLanguages);
+            }
+            if ((this.onGetSupportedLanguagesCompletedDelegate == null)) {
+                this.onGetSupportedLanguagesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetSupportedLanguagesCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetSupportedLanguagesDelegate, null, this.onEndGetSupportedLanguagesDelegate, this.onGetSupportedLanguagesCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Views.SL.ModelService.IModelService.BeginGetWordtypes(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetWordtypes(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto> Views.SL.ModelService.IModelService.EndGetWordtypes(System.IAsyncResult result) {
+            return base.Channel.EndGetWordtypes(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetWordtypes(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((Views.SL.ModelService.IModelService)(this)).BeginGetWordtypes(callback, asyncState);
+        }
+        
+        private object[] OnEndGetWordtypes(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto> retVal = ((Views.SL.ModelService.IModelService)(this)).EndGetWordtypes(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetWordtypesCompleted(object state) {
+            if ((this.GetWordtypesCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetWordtypesCompleted(this, new GetWordtypesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetWordtypesAsync() {
+            this.GetWordtypesAsync(null);
+        }
+        
+        public void GetWordtypesAsync(object userState) {
+            if ((this.onBeginGetWordtypesDelegate == null)) {
+                this.onBeginGetWordtypesDelegate = new BeginOperationDelegate(this.OnBeginGetWordtypes);
+            }
+            if ((this.onEndGetWordtypesDelegate == null)) {
+                this.onEndGetWordtypesDelegate = new EndOperationDelegate(this.OnEndGetWordtypes);
+            }
+            if ((this.onGetWordtypesCompletedDelegate == null)) {
+                this.onGetWordtypesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetWordtypesCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetWordtypesDelegate, null, this.onEndGetWordtypesDelegate, this.onGetWordtypesCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Views.SL.ModelService.IModelService.BeginUpdateBaseword(Views.SL.ModelService.BasewordDto baseword, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUpdateBaseword(baseword, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool Views.SL.ModelService.IModelService.EndUpdateBaseword(System.IAsyncResult result) {
+            return base.Channel.EndUpdateBaseword(result);
+        }
+        
+        private System.IAsyncResult OnBeginUpdateBaseword(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Views.SL.ModelService.BasewordDto baseword = ((Views.SL.ModelService.BasewordDto)(inValues[0]));
+            return ((Views.SL.ModelService.IModelService)(this)).BeginUpdateBaseword(baseword, callback, asyncState);
+        }
+        
+        private object[] OnEndUpdateBaseword(System.IAsyncResult result) {
+            bool retVal = ((Views.SL.ModelService.IModelService)(this)).EndUpdateBaseword(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnUpdateBasewordCompleted(object state) {
+            if ((this.UpdateBasewordCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UpdateBasewordCompleted(this, new UpdateBasewordCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UpdateBasewordAsync(Views.SL.ModelService.BasewordDto baseword) {
+            this.UpdateBasewordAsync(baseword, null);
+        }
+        
+        public void UpdateBasewordAsync(Views.SL.ModelService.BasewordDto baseword, object userState) {
+            if ((this.onBeginUpdateBasewordDelegate == null)) {
+                this.onBeginUpdateBasewordDelegate = new BeginOperationDelegate(this.OnBeginUpdateBaseword);
+            }
+            if ((this.onEndUpdateBasewordDelegate == null)) {
+                this.onEndUpdateBasewordDelegate = new EndOperationDelegate(this.OnEndUpdateBaseword);
+            }
+            if ((this.onUpdateBasewordCompletedDelegate == null)) {
+                this.onUpdateBasewordCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateBasewordCompleted);
+            }
+            base.InvokeAsync(this.onBeginUpdateBasewordDelegate, new object[] {
+                        baseword}, this.onEndUpdateBasewordDelegate, this.onUpdateBasewordCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -354,6 +674,43 @@ namespace Views.SL.ModelService {
             public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> EndGetBasewordsByText(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.BasewordDto>)(base.EndInvoke("GetBasewordsByText", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetSupportedLanguages(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("GetSupportedLanguages", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto> EndGetSupportedLanguages(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.LanguageDto>)(base.EndInvoke("GetSupportedLanguages", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetWordtypes(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("GetWordtypes", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto> EndGetWordtypes(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelService.WordtypeDto>)(base.EndInvoke("GetWordtypes", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginUpdateBaseword(Views.SL.ModelService.BasewordDto baseword, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = baseword;
+                System.IAsyncResult _result = base.BeginInvoke("UpdateBaseword", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndUpdateBaseword(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("UpdateBaseword", _args, result)));
                 return _result;
             }
         }
