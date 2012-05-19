@@ -17,6 +17,22 @@ namespace Views.SL.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
+        #region Properties
+        private BasewordViewModel _selectedBaseword;
+
+        public BasewordViewModel SelectedBaseword
+        {
+            get { return _selectedBaseword; }
+            set
+            {
+                if (_selectedBaseword != value)
+                {
+                    SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
+                    UpdateBasewordCommand.UpdateCanExecute();
+                    ServiceMessage = string.Empty;
+                }
+            }
+        }
         private ObservableCollection<LanguageViewModel> _languages;
 
         public ObservableCollection<LanguageViewModel> Languages
@@ -73,15 +89,17 @@ namespace Views.SL.ViewModels
             _client.GetBasewordsByTextOrIdAsync(SearchText);
         }
 
-        private readonly ModelServiceClient _client;
 
         private string _serviceMessage;
 
         public string ServiceMessage
         {
             get { return _serviceMessage; }
-            set { SetPropertyValue(ref _serviceMessage, value, () => ServiceMessage);}
+            set { SetPropertyValue(ref _serviceMessage, value, () => ServiceMessage); }
         }
+        #endregion
+
+        private readonly ModelServiceClient _client;
 
         public MainPageViewModel()
         {
@@ -98,6 +116,7 @@ namespace Views.SL.ViewModels
             }
         }
 
+        #region Callbacks
         private void UpdateBasewordCompleted(object sender, UpdateBasewordCompletedEventArgs e)
         {
             ServiceMessage = e.Result ? "Baseword erfolgreich aktualisiert" : "Aktualisierung des Basewords fehlgeschlagen";
@@ -123,7 +142,7 @@ namespace Views.SL.ViewModels
             }
         }
 
-        void GetBasewordsByTextOrIdCompleted(object sender, GetBasewordsByTextOrIdCompletedEventArgs e)
+        private void GetBasewordsByTextOrIdCompleted(object sender, GetBasewordsByTextOrIdCompletedEventArgs e)
         {
             var basewordDtos = e.Result;
             SearchedBasewords = new ObservableCollection<BasewordViewModel>();
@@ -132,7 +151,9 @@ namespace Views.SL.ViewModels
                 SearchedBasewords.Add(new BasewordViewModel(basewordDto));
             }
         }
+        #endregion
 
+        #region Commands
         private RelayCommand _updateBasewordCommand;
 
         public RelayCommand UpdateBasewordCommand
@@ -149,22 +170,6 @@ namespace Views.SL.ViewModels
         {
             return SelectedBaseword != null;
         }
-
-        private BasewordViewModel _selectedBaseword;
-
-        public BasewordViewModel SelectedBaseword
-        {
-            get { return _selectedBaseword; }
-            set
-            {
-                if (_selectedBaseword != value)
-                {
-                    SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
-                    UpdateBasewordCommand.UpdateCanExecute();
-                    ServiceMessage = string.Empty;
-                }
-            }
-        }
-
+        #endregion
     }
 }
