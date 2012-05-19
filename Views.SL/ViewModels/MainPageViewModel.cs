@@ -73,7 +73,15 @@ namespace Views.SL.ViewModels
             _client.GetBasewordsByTextAsync(SearchText);
         }
 
-        private ModelServiceClient _client;
+        private readonly ModelServiceClient _client;
+
+        private string _serviceMessage;
+
+        public string ServiceMessage
+        {
+            get { return _serviceMessage; }
+            set { SetPropertyValue(ref _serviceMessage, value, () => ServiceMessage);}
+        }
 
         public MainPageViewModel()
         {
@@ -83,10 +91,16 @@ namespace Views.SL.ViewModels
                 _client.GetBasewordsByTextCompleted += new EventHandler<GetBasewordsByTextCompletedEventArgs>(GetBasewordsByTextCompleted);
                 _client.GetSupportedLanguagesCompleted += GetSupportedLanguagesCompleted;
                 _client.GetWordtypesCompleted += GetWordtypesCompleted;
+                _client.UpdateBasewordCompleted += UpdateBasewordCompleted;
                 _client.GetSupportedLanguagesAsync();
                 _client.GetWordtypesAsync();
                 _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword());
             }
+        }
+
+        private void UpdateBasewordCompleted(object sender, UpdateBasewordCompletedEventArgs e)
+        {
+            ServiceMessage = e.Result ? "Baseword erfolgreich aktualisiert" : "Aktualisierung des Basewords fehlgeschlagen";
         }
 
         private void GetWordtypesCompleted(object sender, GetWordtypesCompletedEventArgs e)
@@ -119,7 +133,6 @@ namespace Views.SL.ViewModels
             }
         }
 
-
         private RelayCommand _updateBasewordCommand;
 
         public RelayCommand UpdateBasewordCommand
@@ -148,6 +161,7 @@ namespace Views.SL.ViewModels
                 {
                     SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
                     UpdateBasewordCommand.UpdateCanExecute();
+                    ServiceMessage = string.Empty;
                 }
             }
         }
