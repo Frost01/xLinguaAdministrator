@@ -233,6 +233,11 @@ namespace Views.SL.ModelServiceReference {
         System.IAsyncResult BeginUpdateBaseword(Views.SL.ModelServiceReference.BasewordDto baseword, System.AsyncCallback callback, object asyncState);
         
         bool EndUpdateBaseword(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/DeleteBaseword", ReplyAction="http://tempuri.org/IModelService/DeleteBasewordResponse")]
+        System.IAsyncResult BeginDeleteBaseword(Views.SL.ModelServiceReference.BasewordDto baseword, System.AsyncCallback callback, object asyncState);
+        
+        bool EndDeleteBaseword(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -317,6 +322,25 @@ namespace Views.SL.ModelServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DeleteBasewordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public DeleteBasewordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ModelServiceClient : System.ServiceModel.ClientBase<Views.SL.ModelServiceReference.IModelService>, Views.SL.ModelServiceReference.IModelService {
         
         private BeginOperationDelegate onBeginGetBasewordsByTextOrIdDelegate;
@@ -342,6 +366,12 @@ namespace Views.SL.ModelServiceReference {
         private EndOperationDelegate onEndUpdateBasewordDelegate;
         
         private System.Threading.SendOrPostCallback onUpdateBasewordCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDeleteBasewordDelegate;
+        
+        private EndOperationDelegate onEndDeleteBasewordDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeleteBasewordCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -403,6 +433,8 @@ namespace Views.SL.ModelServiceReference {
         public event System.EventHandler<GetWordtypesCompletedEventArgs> GetWordtypesCompleted;
         
         public event System.EventHandler<UpdateBasewordCompletedEventArgs> UpdateBasewordCompleted;
+        
+        public event System.EventHandler<DeleteBasewordCompletedEventArgs> DeleteBasewordCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -588,6 +620,52 @@ namespace Views.SL.ModelServiceReference {
                         baseword}, this.onEndUpdateBasewordDelegate, this.onUpdateBasewordCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Views.SL.ModelServiceReference.IModelService.BeginDeleteBaseword(Views.SL.ModelServiceReference.BasewordDto baseword, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeleteBaseword(baseword, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool Views.SL.ModelServiceReference.IModelService.EndDeleteBaseword(System.IAsyncResult result) {
+            return base.Channel.EndDeleteBaseword(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeleteBaseword(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Views.SL.ModelServiceReference.BasewordDto baseword = ((Views.SL.ModelServiceReference.BasewordDto)(inValues[0]));
+            return ((Views.SL.ModelServiceReference.IModelService)(this)).BeginDeleteBaseword(baseword, callback, asyncState);
+        }
+        
+        private object[] OnEndDeleteBaseword(System.IAsyncResult result) {
+            bool retVal = ((Views.SL.ModelServiceReference.IModelService)(this)).EndDeleteBaseword(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnDeleteBasewordCompleted(object state) {
+            if ((this.DeleteBasewordCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeleteBasewordCompleted(this, new DeleteBasewordCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeleteBasewordAsync(Views.SL.ModelServiceReference.BasewordDto baseword) {
+            this.DeleteBasewordAsync(baseword, null);
+        }
+        
+        public void DeleteBasewordAsync(Views.SL.ModelServiceReference.BasewordDto baseword, object userState) {
+            if ((this.onBeginDeleteBasewordDelegate == null)) {
+                this.onBeginDeleteBasewordDelegate = new BeginOperationDelegate(this.OnBeginDeleteBaseword);
+            }
+            if ((this.onEndDeleteBasewordDelegate == null)) {
+                this.onEndDeleteBasewordDelegate = new EndOperationDelegate(this.OnEndDeleteBaseword);
+            }
+            if ((this.onDeleteBasewordCompletedDelegate == null)) {
+                this.onDeleteBasewordCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeleteBasewordCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeleteBasewordDelegate, new object[] {
+                        baseword}, this.onEndDeleteBasewordDelegate, this.onDeleteBasewordCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -711,6 +789,19 @@ namespace Views.SL.ModelServiceReference {
             public bool EndUpdateBaseword(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 bool _result = ((bool)(base.EndInvoke("UpdateBaseword", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginDeleteBaseword(Views.SL.ModelServiceReference.BasewordDto baseword, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = baseword;
+                System.IAsyncResult _result = base.BeginInvoke("DeleteBaseword", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndDeleteBaseword(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("DeleteBaseword", _args, result)));
                 return _result;
             }
         }

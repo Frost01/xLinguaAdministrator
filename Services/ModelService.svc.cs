@@ -76,5 +76,29 @@ namespace Services
             }
             return false;
         }
+
+        public bool DeleteBaseword(BasewordDto basewordDto)
+        {
+            var baseword = _context.Basewords1.FirstOrDefault(b => b.Id == basewordDto.Id);
+            if (baseword != null)
+            {
+                var translations =
+                    _context.Translations1.Where(t => t.BasewordFromId == baseword.Id || t.BasewordToId == baseword.Id);
+                foreach (var translation in translations)
+                {
+                    _context.DeleteObject(translation);
+                }
+                var connections =
+                    _context.Connections1.Where(c => c.BasewordId == baseword.Id);
+                foreach (var connection in connections)
+                {
+                    _context.DeleteObject(connection);
+                }
+                _context.DeleteObject(baseword);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

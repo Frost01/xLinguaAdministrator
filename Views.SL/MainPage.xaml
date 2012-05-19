@@ -75,6 +75,7 @@
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Gesperrt:"/>
                 <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Path=IsLocked, Mode=TwoWay}"/>
                 <Button Grid.Row="6" Grid.Column="0" Content="Speichern" Command="{Binding Path=DataContext.UpdateBasewordCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                <Button Grid.Row="6" Grid.Column="1" Content="Löschen" Command="{Binding Path=DataContext.DeleteBasewordCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             </Grid>
         </Border>
      </Grid>

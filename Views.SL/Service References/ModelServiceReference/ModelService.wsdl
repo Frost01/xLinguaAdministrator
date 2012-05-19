@@ -31,6 +31,12 @@
   <wsdl:message name="IModelService_UpdateBaseword_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateBasewordResponse" />
   </wsdl:message>
+  <wsdl:message name="IModelService_DeleteBaseword_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBaseword" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_DeleteBaseword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBasewordResponse" />
+  </wsdl:message>
   <wsdl:portType name="IModelService">
     <wsdl:operation name="GetBasewordsByTextOrId">
       <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetBasewordsByTextOrId" message="tns:IModelService_GetBasewordsByTextOrId_InputMessage" />
@@ -47,6 +53,10 @@
     <wsdl:operation name="UpdateBaseword">
       <wsdl:input wsaw:Action="http://tempuri.org/IModelService/UpdateBaseword" message="tns:IModelService_UpdateBaseword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IModelService/UpdateBasewordResponse" message="tns:IModelService_UpdateBaseword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBaseword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/DeleteBaseword" message="tns:IModelService_DeleteBaseword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/DeleteBasewordResponse" message="tns:IModelService_DeleteBaseword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IModelService" type="tns:IModelService">
@@ -80,6 +90,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateBaseword">
       <soap:operation soapAction="http://tempuri.org/IModelService/UpdateBaseword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBaseword">
+      <soap:operation soapAction="http://tempuri.org/IModelService/DeleteBaseword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

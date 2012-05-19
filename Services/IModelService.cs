@@ -24,5 +24,8 @@ namespace Services
 
         [OperationContract]
         bool UpdateBaseword(BasewordDto baseword);
+
+        [OperationContract]
+        bool DeleteBaseword(BasewordDto baseword);
     }
 }

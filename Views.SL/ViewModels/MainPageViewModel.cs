@@ -29,6 +29,7 @@ namespace Views.SL.ViewModels
                 {
                     SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
                     UpdateBasewordCommand.UpdateCanExecute();
+                    DeleteBasewordCommand.UpdateCanExecute();
                     ServiceMessage = string.Empty;
                 }
             }
@@ -112,11 +113,20 @@ namespace Views.SL.ViewModels
                 _client.UpdateBasewordCompleted += UpdateBasewordCompleted;
                 _client.GetSupportedLanguagesAsync();
                 _client.GetWordtypesAsync();
+                _client.DeleteBasewordCompleted += DeleteBasewordCompleted;
                 _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword());
+                _deleteBasewordCommand = new RelayCommand(param => this.DeleteBaseword(), param => this.CanDeleteBaseword());
             }
         }
 
+
+
         #region Callbacks
+        private void DeleteBasewordCompleted(object sender, DeleteBasewordCompletedEventArgs e)
+        {
+            ServiceMessage = e.Result ? "Baseword erfolgreich gelöscht!" : "Löschen des Basewords fehlgeschlagen";
+        }
+
         private void UpdateBasewordCompleted(object sender, UpdateBasewordCompletedEventArgs e)
         {
             ServiceMessage = e.Result ? "Baseword erfolgreich aktualisiert" : "Aktualisierung des Basewords fehlgeschlagen";
@@ -154,7 +164,7 @@ namespace Views.SL.ViewModels
         #endregion
 
         #region Commands
-        private RelayCommand _updateBasewordCommand;
+        private readonly RelayCommand _updateBasewordCommand;
 
         public RelayCommand UpdateBasewordCommand
         {
@@ -167,6 +177,30 @@ namespace Views.SL.ViewModels
         }
 
         private bool CanUpdateBaseword()
+        {
+            return SelectedBaseword != null;
+        }
+
+        private readonly RelayCommand _deleteBasewordCommand;
+
+        public RelayCommand DeleteBasewordCommand
+        {
+            get { return _deleteBasewordCommand; }
+        }
+
+        private void DeleteBaseword()
+        {
+            var result = MessageBox.Show("Hiermit wird das Baseword mit allen Referenzen aus der Datenbank gelöscht! Fortfahren?",
+                            "Achtung!", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                _client.DeleteBasewordAsync(SelectedBaseword.CopyToDto());
+                SelectedBaseword = null;
+                SearchText = string.Empty;
+            }
+        }
+
+        private bool CanDeleteBaseword()
         {
             return SelectedBaseword != null;
         }
