@@ -23,6 +23,8 @@ namespace Views.SL.ViewModels
         private string _comment;
         private bool _isLocked;
         private int _status;
+        private string _serviceMessage;
+        private readonly ModelServiceClient _client;
 
         public int Id
         {
@@ -66,6 +68,12 @@ namespace Views.SL.ViewModels
             set { SetPropertyValue(ref _status, value, () => Status);}
         }
 
+        public string ServiceMessage
+        {
+            get { return _serviceMessage; }
+            set { SetPropertyValue(ref _serviceMessage, value, () => ServiceMessage);}
+        }
+
         public BasewordViewModel(BasewordDto basewordDto)
         {
             Id = basewordDto.Id;
@@ -74,6 +82,15 @@ namespace Views.SL.ViewModels
             Wordtype = new WordtypeViewModel(basewordDto.Wordtype);
             Comment = basewordDto.Comment;
             IsLocked = basewordDto.IsLocked;
+
+            _client = new ModelServiceClient();
+            _client.UpdateBasewordCompleted += UpdateBasewordCallback;
+            _updateBasewordCommand = new RelayCommand(param=>UpdateBaseword());
+        }
+
+        private void UpdateBasewordCallback(object sender, UpdateBasewordCompletedEventArgs e)
+        {
+            ServiceMessage = string.Format(e.Result ?string.Format("Baseword {0} mit id: {1} efolgreich aktualisiert",this.Text,this.Id) : string.Format("Aktualisierung von Baseword {0} mit id: {1} fehlgeschlagen", this.Text, this.Id));
         }
 
         public BasewordDto CopyToDto()
@@ -98,5 +115,17 @@ namespace Views.SL.ViewModels
             return basewordDto;
         }
 
+        private readonly RelayCommand _updateBasewordCommand;
+
+        public RelayCommand UpdateBasewordCommand
+        {
+            get { return _updateBasewordCommand; }
+        }
+
+        private void UpdateBaseword()
+        {
+            ServiceMessage = "Aktualisiere Baseword";
+            _client.UpdateBasewordAsync(CopyToDto());
+        }
     }
 }

@@ -45,7 +45,6 @@ namespace Views.SL.ViewModels
                 if (_selectedBaseword != value)
                 {
                     SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
-                    UpdateBasewordCommand.UpdateCanExecute();
                     DeleteBasewordCommand.UpdateCanExecute();
                     if (value!=null) UpdateTranslations();
                     ServiceMessage = string.Empty;
@@ -135,17 +134,13 @@ namespace Views.SL.ViewModels
                 _client.GetBasewordsByTextOrIdCompleted += GetBasewordsByTextOrIdCompleted;
                 _client.GetSupportedLanguagesCompleted += GetSupportedLanguagesCompleted;
                 _client.GetWordtypesCompleted += GetWordtypesCompleted;
-                _client.UpdateBasewordCompleted += UpdateBasewordCompleted;
                 _client.GetSupportedLanguagesAsync();
                 _client.GetWordtypesAsync();
                 _client.DeleteBasewordCompleted += DeleteBasewordCompleted;
                 _client.GetTranslationsFromBasewordCompleted += GetTranslationsFromBasewordCompleted;
-                _updateBasewordCommand = new RelayCommand(param => this.UpdateBaseword(),param => this.CanUpdateBaseword());
                 _deleteBasewordCommand = new RelayCommand(param => this.DeleteBaseword(), param => this.CanDeleteBaseword());
             }
         }
-
-
 
         #region Callbacks
         private void GetTranslationsFromBasewordCompleted(object sender, GetTranslationsFromBasewordCompletedEventArgs e)
@@ -160,11 +155,6 @@ namespace Views.SL.ViewModels
         private void DeleteBasewordCompleted(object sender, DeleteBasewordCompletedEventArgs e)
         {
             ServiceMessage = e.Result ? "Baseword erfolgreich gelöscht!" : "Löschen des Basewords fehlgeschlagen";
-        }
-
-        private void UpdateBasewordCompleted(object sender, UpdateBasewordCompletedEventArgs e)
-        {
-            ServiceMessage = e.Result ? "Baseword erfolgreich aktualisiert" : "Aktualisierung des Basewords fehlgeschlagen";
         }
 
         private void GetWordtypesCompleted(object sender, GetWordtypesCompletedEventArgs e)
@@ -199,23 +189,6 @@ namespace Views.SL.ViewModels
         #endregion
 
         #region Commands
-        private readonly RelayCommand _updateBasewordCommand;
-
-        public RelayCommand UpdateBasewordCommand
-        {
-            get { return _updateBasewordCommand; }
-        }
-
-        private void UpdateBaseword()
-        {
-            _client.UpdateBasewordAsync(SelectedBaseword.CopyToDto());
-        }
-
-        private bool CanUpdateBaseword()
-        {
-            return SelectedBaseword != null;
-        }
-
         private readonly RelayCommand _deleteBasewordCommand;
 
         public RelayCommand DeleteBasewordCommand

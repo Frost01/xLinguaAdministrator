@@ -23,7 +23,7 @@
         <Border Grid.Column="0" Grid.Row="0" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Background="Beige">
             <TextBox Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
         </Border>
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=ServiceMessage}"/> 
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedBaseword.ServiceMessage}"/> 
         <Border Grid.Column="0" Grid.Row="1" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Background="Beige">
             <ListBox Grid.Column="0" Grid.Row="1" Name="SearchResults" 
                      ItemsSource="{Binding Path=SearchedBasewords}" 
@@ -76,7 +76,7 @@
                 <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=Comment, Mode=TwoWay}"/>
                 <TextBlock Grid.Row="6" Grid.Column="0" Text="Gesperrt:"/>
                 <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Path=IsLocked, Mode=TwoWay}"/>
-                <Button Grid.Row="7" Grid.Column="0" Content="Speichern" Command="{Binding Path=DataContext.UpdateBasewordCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                <Button Grid.Row="7" Grid.Column="0" Content="Speichern" Command="{Binding Path=UpdateBasewordCommand}"/>
                 <Button Grid.Row="7" Grid.Column="1" Content="Löschen" Command="{Binding Path=DataContext.DeleteBasewordCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             </Grid>
         </Border>
