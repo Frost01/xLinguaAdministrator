@@ -27,8 +27,7 @@ namespace Services
             var resultList = new List<BasewordDto>();
             foreach (Baseword baseword in basewords)
             {
-                var basewordDto = CopyToBasewordDto(baseword);
-                resultList.Add(basewordDto);
+                resultList.Add(CopyToBasewordDto(baseword));
             }
             return resultList;
         }
