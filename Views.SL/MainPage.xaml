@@ -38,6 +38,7 @@
                     <sdk:DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
                     <sdk:DataGridTextColumn Header="Text" Binding="{Binding Path=Text}"/>
                     <sdk:DataGridTextColumn Header="Sprache" Binding="{Binding Path=Language.Text}"/>
+                    <sdk:DataGridTextColumn Header="Wortart" Binding="{Binding Path=Wordtype.Text}"/>
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
         </Border>
