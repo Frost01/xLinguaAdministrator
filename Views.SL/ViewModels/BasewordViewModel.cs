@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.ServiceModel.DomainServices.Client;
@@ -25,6 +27,7 @@ namespace Views.SL.ViewModels
         private int _status;
         private string _serviceMessage;
         private readonly ModelServiceClient _client;
+        private ObservableCollection<TranslationViewModel> _translations; 
 
         public int Id
         {
@@ -74,6 +77,12 @@ namespace Views.SL.ViewModels
             set { SetPropertyValue(ref _serviceMessage, value, () => ServiceMessage);}
         }
 
+        public ObservableCollection<TranslationViewModel> Translations
+        {
+            get { return _translations; }
+            private set { SetPropertyValue(ref _translations, value, () => Translations);}
+        } 
+
         public BasewordViewModel(BasewordDto basewordDto)
         {
             Id = basewordDto.Id;
@@ -82,13 +91,24 @@ namespace Views.SL.ViewModels
             Wordtype = new WordtypeViewModel(basewordDto.Wordtype);
             Comment = basewordDto.Comment;
             IsLocked = basewordDto.IsLocked;
-
+            Translations = GetTranslations(basewordDto);
             _client = new ModelServiceClient();
             _client.UpdateBasewordCompleted += UpdateBasewordCallback;
             _client.DeleteBasewordCompleted += DeleteBasewordCallback;
             _updateBasewordCommand = new RelayCommand(param=>UpdateBaseword());
             _deleteBasewordCommand = new RelayCommand(param => this.DeleteBaseword());
 
+        }
+
+        private ObservableCollection<TranslationViewModel> GetTranslations(BasewordDto basewordDto)
+        {
+            var result = new ObservableCollection<TranslationViewModel>();
+            if (basewordDto.Translations!= null)
+                foreach (var translationDto in basewordDto.Translations)
+                {
+                    result.Add(new TranslationViewModel(this, translationDto));
+                }
+            return result;
         }
 
         private void DeleteBasewordCallback(object sender, DeleteBasewordCompletedEventArgs e)

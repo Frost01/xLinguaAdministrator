@@ -30,6 +30,8 @@ namespace Views.SL.ModelServiceReference {
         
         private string TextField;
         
+        private System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> TranslationsField;
+        
         private Views.SL.ModelServiceReference.WordtypeDto WordtypeField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -93,6 +95,19 @@ namespace Views.SL.ModelServiceReference {
                 if ((object.ReferenceEquals(this.TextField, value) != true)) {
                     this.TextField = value;
                     this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> Translations {
+            get {
+                return this.TranslationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TranslationsField, value) != true)) {
+                    this.TranslationsField = value;
+                    this.RaisePropertyChanged("Translations");
                 }
             }
         }
@@ -196,6 +211,51 @@ namespace Views.SL.ModelServiceReference {
                 if ((object.ReferenceEquals(this.TextField, value) != true)) {
                     this.TextField = value;
                     this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TranslationDto", Namespace="http://schemas.datacontract.org/2004/07/DTO")]
+    public partial class TranslationDto : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Views.SL.ModelServiceReference.BasewordDto BasewordField;
+        
+        private int IdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Views.SL.ModelServiceReference.BasewordDto Baseword {
+            get {
+                return this.BasewordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BasewordField, value) != true)) {
+                    this.BasewordField = value;
+                    this.RaisePropertyChanged("Baseword");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }

@@ -27,7 +27,8 @@ namespace Services
             var resultList = new List<BasewordDto>();
             foreach (Baseword baseword in basewords)
             {
-                resultList.Add(CopyToBasewordDto(baseword));
+                var basewordDto = CopyToBasewordDto(baseword);
+                resultList.Add(basewordDto);
             }
             return resultList;
         }
@@ -98,20 +99,22 @@ namespace Services
             return false;
         }
 
-        public IList<BasewordDto> GetTranslationsFromBaseword(BasewordDto basewordDto)
+        public IList<TranslationDto> GetTranslationsFromBaseword(BasewordDto basewordDto)
         {
-            var resultList = new List<BasewordDto>();
-            var baseword = _context.Basewords1.Include("Translations").FirstOrDefault(b => b.Id == basewordDto.Id);
+            var resultList = new List<TranslationDto>();
+            var baseword = _context.Basewords1.Include("Translations").Include("Translations.BasewordTranslation").FirstOrDefault(b => b.Id == basewordDto.Id);
             if (baseword != null)
             {
-                var basewords = baseword.Translations.Select(t => t.BasewordTranslation);
-                foreach (var basewordModel in basewords)
+                foreach (Translation translation in baseword.Translations)
                 {
-                    resultList.Add(CopyToBasewordDto(basewordModel));
+                    var translationDto = new TranslationDto();
+                    translationDto.Id = translation.Id;
+                    translationDto.Baseword = CopyToBasewordDto(translation.BasewordTranslation);
+                    resultList.Add(translationDto);
                 }
             }
             return resultList;
-        }
+        } 
 
         private BasewordDto CopyToBasewordDto(Baseword basewordModel)
         {

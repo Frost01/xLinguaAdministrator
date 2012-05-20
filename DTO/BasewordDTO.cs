@@ -21,5 +21,7 @@ namespace DTO
         public string Comment { get; set; }
         [DataMember]
         public bool IsLocked { get; set; }
+        [DataMember]
+        public IList<TranslationDto> Translations { get; set; } 
     }
 }

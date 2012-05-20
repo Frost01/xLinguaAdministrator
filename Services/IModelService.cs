@@ -29,6 +29,6 @@ namespace Services
         bool DeleteBaseword(BasewordDto baseword);
 
         [OperationContract]
-        IList<BasewordDto> GetTranslationsFromBaseword(BasewordDto basewordDto);
+        IList<TranslationDto> GetTranslationsFromBaseword(BasewordDto basewordDto);
     }
 }

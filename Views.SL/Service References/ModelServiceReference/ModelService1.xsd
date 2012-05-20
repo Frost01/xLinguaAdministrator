@@ -13,6 +13,7 @@
       <xs:element minOccurs="0" name="IsLocked" type="xs:boolean" />
       <xs:element minOccurs="0" name="Language" nillable="true" type="tns:LanguageDto" />
       <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Translations" nillable="true" type="tns:ArrayOfTranslationDto" />
       <xs:element minOccurs="0" name="Wordtype" nillable="true" type="tns:WordtypeDto" />
     </xs:sequence>
   </xs:complexType>
@@ -24,6 +25,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LanguageDto" nillable="true" type="tns:LanguageDto" />
+  <xs:complexType name="ArrayOfTranslationDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TranslationDto" nillable="true" type="tns:TranslationDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTranslationDto" nillable="true" type="tns:ArrayOfTranslationDto" />
+  <xs:complexType name="TranslationDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Baseword" nillable="true" type="tns:BasewordDto" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TranslationDto" nillable="true" type="tns:TranslationDto" />
   <xs:complexType name="WordtypeDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
