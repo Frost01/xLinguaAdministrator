@@ -85,7 +85,15 @@ namespace Views.SL.ViewModels
 
             _client = new ModelServiceClient();
             _client.UpdateBasewordCompleted += UpdateBasewordCallback;
+            _client.DeleteBasewordCompleted += DeleteBasewordCallback;
             _updateBasewordCommand = new RelayCommand(param=>UpdateBaseword());
+            _deleteBasewordCommand = new RelayCommand(param => this.DeleteBaseword());
+
+        }
+
+        private void DeleteBasewordCallback(object sender, DeleteBasewordCompletedEventArgs e)
+        {
+            ServiceMessage = e.Result ? string.Format("Baseword {0} mit id: {1} erfolgreich gelöscht!", this.Text, this.Id) : string.Format("Löschen des Basewords {0} mit id: {1} fehlgeschlagen", this.Text, this.Id);
         }
 
         private void UpdateBasewordCallback(object sender, UpdateBasewordCompletedEventArgs e)
@@ -126,6 +134,25 @@ namespace Views.SL.ViewModels
         {
             ServiceMessage = "Aktualisiere Baseword";
             _client.UpdateBasewordAsync(CopyToDto());
+        }
+
+        private readonly RelayCommand _deleteBasewordCommand;
+
+        public RelayCommand DeleteBasewordCommand
+        {
+            get { return _deleteBasewordCommand; }
+        }
+
+        private void DeleteBaseword()
+        {
+            var result = MessageBox.Show("Hiermit wird das Baseword mit allen Referenzen aus der Datenbank gelöscht! Fortfahren?",
+                            "Achtung!", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                _client.DeleteBasewordAsync(CopyToDto());
+                //SelectedBaseword = null;
+                //SearchText = string.Empty;
+            }
         }
     }
 }
