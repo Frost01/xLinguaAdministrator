@@ -141,6 +141,9 @@
     <None Include="Service References\ModelServiceReference\Views.SL.ModelServiceReference.LanguageDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ModelServiceReference\Views.SL.ModelServiceReference.TranslationDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ModelServiceReference\Views.SL.ModelServiceReference.WordtypeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

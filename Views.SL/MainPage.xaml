@@ -23,12 +23,11 @@
         <Border Grid.Column="0" Grid.Row="0" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Background="Beige">
             <TextBox Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
         </Border>
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedBaseword.ServiceMessage}"/> 
+        <TextBlock Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Text="{Binding Path=SelectedItem.ServiceMessage, ElementName=SearchResults}"/> 
         <Border Grid.Column="0" Grid.Row="1" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Background="Beige">
             <ListBox Grid.Column="0" Grid.Row="1" Name="SearchResults" 
                      ItemsSource="{Binding Path=SearchedBasewords}" 
                      DisplayMemberPath="Text" 
-                     SelectedItem="{Binding Path=SelectedBaseword, Mode=TwoWay}"
                      Height="100" 
                      BorderThickness="1" 
                      Margin="5"/>
@@ -80,7 +79,7 @@
                 <Button Grid.Row="7" Grid.Column="1" Content="Löschen" Command="{Binding Path=DeleteBasewordCommand}"/>
             </Grid>
         </Border>
-        <Border Grid.Column="2" Grid.Row="1" CornerRadius="5" BorderThickness="1" BorderBrush="Black" Background="AliceBlue" MaxHeight="170">
+        <Border Grid.Column="2" Grid.Row="1" CornerRadius="5" BorderThickness="1" BorderBrush="Black" Background="AliceBlue" MaxHeight="170" DataContext="{Binding Path=SelectedItem, ElementName=SearchResults}">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -90,12 +89,11 @@
                 <TextBlock Grid.Row="0" Text="Übersetzungen"/>
                 <sdk:DataGrid Grid.Row="1" ItemsSource="{Binding Path=Translations}" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True">
                     <sdk:DataGrid.Columns>
-                        <sdk:DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
-                        <sdk:DataGridTextColumn Header="Text" Binding="{Binding Path=Text}"/>
-                        <sdk:DataGridTextColumn Header="Sprache" Binding="{Binding Path=Language.Text}"/>
+                        <sdk:DataGridTextColumn Header="Id" Binding="{Binding Path=Baseword.Id}"/>
+                        <sdk:DataGridTextColumn Header="Text" Binding="{Binding Path=Baseword.Text}"/>
+                        <sdk:DataGridTextColumn Header="Sprache" Binding="{Binding Path=Baseword.Language.Text}"/>
                     </sdk:DataGrid.Columns>
                 </sdk:DataGrid>
-                <TextBlock Grid.Row="2" Text="{Binding Path=TranslationServiceText}"/>
             </Grid>
         </Border>
      </Grid>

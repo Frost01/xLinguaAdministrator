@@ -79,7 +79,16 @@ namespace Views.SL.ViewModels
 
         public ObservableCollection<TranslationViewModel> Translations
         {
-            get { return _translations; }
+            get
+            {
+                if (_translations == null)
+                {
+                    _translations = new ObservableCollection<TranslationViewModel>();
+                    _client.GetTranslationsFromBasewordAsync(CopyToDto());
+                    ServiceMessage = string.Format("Lade Übersetzungen für Baseword {0} mit id {1}.", this.Text, this.Id);
+                }
+                return _translations;
+            }
             private set { SetPropertyValue(ref _translations, value, () => Translations);}
         } 
 
@@ -91,24 +100,22 @@ namespace Views.SL.ViewModels
             Wordtype = new WordtypeViewModel(basewordDto.Wordtype);
             Comment = basewordDto.Comment;
             IsLocked = basewordDto.IsLocked;
-            Translations = GetTranslations(basewordDto);
             _client = new ModelServiceClient();
             _client.UpdateBasewordCompleted += UpdateBasewordCallback;
             _client.DeleteBasewordCompleted += DeleteBasewordCallback;
+            _client.GetTranslationsFromBasewordCompleted += GetTranslationsCallback;
             _updateBasewordCommand = new RelayCommand(param=>UpdateBaseword());
             _deleteBasewordCommand = new RelayCommand(param => this.DeleteBaseword());
-
         }
 
-        private ObservableCollection<TranslationViewModel> GetTranslations(BasewordDto basewordDto)
+        private void GetTranslationsCallback(object sender, GetTranslationsFromBasewordCompletedEventArgs e)
         {
-            var result = new ObservableCollection<TranslationViewModel>();
-            if (basewordDto.Translations!= null)
-                foreach (var translationDto in basewordDto.Translations)
-                {
-                    result.Add(new TranslationViewModel(this, translationDto));
-                }
-            return result;
+            foreach (TranslationDto translationDto in e.Result)
+            {
+                Translations.Add(new TranslationViewModel(this, translationDto));
+            }
+            ServiceMessage = string.Format("Laden der Übersetzungen für Baseword {0} mit id {1} abgeschlossen.",
+                                           this.Text, this.Id);
         }
 
         private void DeleteBasewordCallback(object sender, DeleteBasewordCompletedEventArgs e)
@@ -170,8 +177,7 @@ namespace Views.SL.ViewModels
             if (result == MessageBoxResult.OK)
             {
                 _client.DeleteBasewordAsync(CopyToDto());
-                //SelectedBaseword = null;
-                //SearchText = string.Empty;
+                // TODO MainpageViewModel should recognize this!!
             }
         }
     }

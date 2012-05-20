@@ -18,37 +18,6 @@ namespace Views.SL.ViewModels
     public class MainPageViewModel : BaseViewModel
     {
         #region Properties
-
-        private string _translationServiceText;
-
-        public string TranslationServiceText
-        {
-            get { return _translationServiceText; }
-            private set { SetPropertyValue(ref _translationServiceText, value, () => TranslationServiceText);}
-        }
-
-        private ObservableCollection<BasewordViewModel> _translations;
- 
-        public ObservableCollection<BasewordViewModel> Translations
-        {
-            get { return _translations; }
-            private set { SetPropertyValue(ref _translations, value, () => Translations);}
-        } 
-
-        private BasewordViewModel _selectedBaseword;
-
-        public BasewordViewModel SelectedBaseword
-        {
-            get { return _selectedBaseword; }
-            set
-            {
-                if (_selectedBaseword != value)
-                {
-                    SetPropertyValue(ref _selectedBaseword, value, () => SelectedBaseword);
-                    if (value!=null) UpdateTranslations();
-                }
-            }
-        }
         private ObservableCollection<LanguageViewModel> _languages;
 
         public ObservableCollection<LanguageViewModel> Languages
@@ -107,13 +76,6 @@ namespace Views.SL.ViewModels
             _client.GetBasewordsByTextOrIdAsync(SearchText);
         }
 
-        private void UpdateTranslations()
-        {
-            Translations = new ObservableCollection<BasewordViewModel>();
-            TranslationServiceText = "Lade Übersetzungen ...";
-            _client.GetTranslationsFromBasewordAsync(SelectedBaseword.CopyToDto());
-        }
-
         private readonly ModelServiceClient _client;
 
         public MainPageViewModel()
@@ -126,20 +88,10 @@ namespace Views.SL.ViewModels
                 _client.GetWordtypesCompleted += GetWordtypesCompleted;
                 _client.GetSupportedLanguagesAsync();
                 _client.GetWordtypesAsync();
-                _client.GetTranslationsFromBasewordCompleted += GetTranslationsFromBasewordCompleted;
             }
         }
 
         #region Callbacks
-        private void GetTranslationsFromBasewordCompleted(object sender, GetTranslationsFromBasewordCompletedEventArgs e)
-        {
-            foreach (var basewordDto in e.Result)
-            {
-                Translations.Add(new BasewordViewModel(basewordDto));
-            }
-            TranslationServiceText = "Laden der Übersetzungen beendet.";
-        }
-
         private void GetWordtypesCompleted(object sender, GetWordtypesCompletedEventArgs e)
         {
             var wordtypes = e.Result;

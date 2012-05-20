@@ -302,7 +302,7 @@ namespace Views.SL.ModelServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/GetTranslationsFromBaseword", ReplyAction="http://tempuri.org/IModelService/GetTranslationsFromBasewordResponse")]
         System.IAsyncResult BeginGetTranslationsFromBaseword(Views.SL.ModelServiceReference.BasewordDto basewordDto, System.AsyncCallback callback, object asyncState);
         
-        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> EndGetTranslationsFromBaseword(System.IAsyncResult result);
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> EndGetTranslationsFromBaseword(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -415,10 +415,10 @@ namespace Views.SL.ModelServiceReference {
             this.results = results;
         }
         
-        public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> Result {
+        public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto>)(this.results[0]));
+                return ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto>)(this.results[0]));
             }
         }
     }
@@ -764,7 +764,7 @@ namespace Views.SL.ModelServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> Views.SL.ModelServiceReference.IModelService.EndGetTranslationsFromBaseword(System.IAsyncResult result) {
+        System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> Views.SL.ModelServiceReference.IModelService.EndGetTranslationsFromBaseword(System.IAsyncResult result) {
             return base.Channel.EndGetTranslationsFromBaseword(result);
         }
         
@@ -774,7 +774,7 @@ namespace Views.SL.ModelServiceReference {
         }
         
         private object[] OnEndGetTranslationsFromBaseword(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> retVal = ((Views.SL.ModelServiceReference.IModelService)(this)).EndGetTranslationsFromBaseword(result);
+            System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> retVal = ((Views.SL.ModelServiceReference.IModelService)(this)).EndGetTranslationsFromBaseword(result);
             return new object[] {
                     retVal};
         }
@@ -950,9 +950,9 @@ namespace Views.SL.ModelServiceReference {
                 return _result;
             }
             
-            public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> EndGetTranslationsFromBaseword(System.IAsyncResult result) {
+            public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> EndGetTranslationsFromBaseword(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.BasewordDto>)(base.EndInvoke("GetTranslationsFromBaseword", _args, result)));
+                System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto>)(base.EndInvoke("GetTranslationsFromBaseword", _args, result)));
                 return _result;
             }
         }
