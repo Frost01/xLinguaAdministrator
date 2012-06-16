@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="xLingua_StagingModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="xLingua_StagingModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="xLingua_StagingModelStoreContainer">
           <EntitySet Name="abbreviations" EntityType="xLingua_StagingModel.Store.abbreviations" store:Type="Tables" Schema="xLingua_Staging" />
           <EntitySet Name="basewords" EntityType="xLingua_StagingModel.Store.basewords" store:Type="Tables" Schema="xLingua_Staging" />
@@ -16,6 +16,7 @@
           <EntitySet Name="specifics" EntityType="xLingua_StagingModel.Store.specifics" store:Type="Tables" Schema="xLingua_Staging" />
           <EntitySet Name="translations" EntityType="xLingua_StagingModel.Store.translations" store:Type="Tables" Schema="xLingua_Staging" />
           <EntitySet Name="types" EntityType="xLingua_StagingModel.Store.types" store:Type="Tables" Schema="xLingua_Staging" />
+          <EntitySet Name="users" EntityType="xLingua_StagingModel.Store.users" store:Type="Tables" Schema="xLingua_Staging" />
           <EntitySet Name="words" EntityType="xLingua_StagingModel.Store.words" store:Type="Tables" Schema="xLingua_Staging" />
           <AssociationSet Name="complexphrases_fk" Association="xLingua_StagingModel.Store.complexphrases_fk">
             <End Role="basewords" EntitySet="basewords" />
@@ -152,6 +153,17 @@
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="type" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="varchar" MaxLength="45" />
+          <Property Name="password" Type="varchar" MaxLength="45" />
+          <Property Name="firstname" Type="varchar" MaxLength="45" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="isApproved" Type="bool" />
+        </EntityType>
         <EntityType Name="words">
           <Key>
             <PropertyRef Name="id" />
@@ -285,15 +297,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-      warning 6013: The table/view 'xLingua_Staging.basicwordthemes' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-      
-      <EntityType Name="basicwordthemes">
-        <Property Name="basicwordid" Type="int" />
-        <Property Name="themesid" Type="int" />
-      </EntityType>-->
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="xLingua_StagingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -357,6 +361,7 @@
             <End Role="Baseword" EntitySet="Basewords1" />
             <End Role="Translation" EntitySet="Translations1" />
           </AssociationSet>
+          <EntitySet Name="Users1" EntityType="xLingua_StagingModel.User" />
         </EntityContainer>
         <EntityType Name="Abbreviation">
           <Key>
@@ -633,6 +638,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Email" />
+          <Property Type="String" Name="Password" />
+          <Property Type="String" Name="Firstname" />
+          <Property Type="String" Name="Name" />
+          <Property Type="Boolean" Name="IsApproved" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -707,6 +723,18 @@
             <ScalarProperty Name="Id" ColumnName="id" />
             <ScalarProperty Name="Text" ColumnName="word" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users1">
+            <EntityTypeMapping TypeName="xLingua_StagingModel.User">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="IsApproved" ColumnName="isApproved" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Firstname" ColumnName="firstname" />
+                <ScalarProperty Name="Password" ColumnName="password" />
+                <ScalarProperty Name="Email" ColumnName="email" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -798,6 +826,7 @@
           <ConnectorPoint PointX="3.4791666666666665" PointY="5.695309374999999" />
           <ConnectorPoint PointX="2.125" PointY="5.695309374999999" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="xLingua_StagingModel.User" Width="1.5" PointX="10.25" PointY="4.5" Height="2.1725878906250031" />
       </Diagram>
     </Diagrams>
   </Designer>

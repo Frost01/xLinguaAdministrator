@@ -30,5 +30,8 @@ namespace Services
 
         [OperationContract]
         IList<TranslationDto> GetTranslationsFromBaseword(BasewordDto basewordDto);
+
+        [OperationContract]
+        bool ValidateUser(string email, string password);
     }
 }

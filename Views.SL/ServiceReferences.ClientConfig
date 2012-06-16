@@ -9,7 +9,7 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://localhost:49166/ModelService.svc" binding="basicHttpBinding"
+            <endpoint address="http://adminservice.xlingua.de/ModelService.svc" binding="basicHttpBinding"
                 bindingConfiguration="BasicHttpBinding_IModelService" contract="ModelServiceReference.IModelService"
                 name="BasicHttpBinding_IModelService" />
         </client>

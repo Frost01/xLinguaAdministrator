@@ -256,6 +256,22 @@ namespace Models.EF
             }
         }
         private ObjectSet<Flexion> _Flexions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<User> Users1
+        {
+            get
+            {
+                if ((_Users1 == null))
+                {
+                    _Users1 = base.CreateObjectSet<User>("Users1");
+                }
+                return _Users1;
+            }
+        }
+        private ObjectSet<User> _Users1;
 
         #endregion
         #region AddTo Methods
@@ -346,6 +362,14 @@ namespace Models.EF
         public void AddToFlexions(Flexion flexion)
         {
             base.AddObject("Flexions", flexion);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Users1 EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUsers1(User user)
+        {
+            base.AddObject("Users1", user);
         }
 
         #endregion
@@ -2458,6 +2482,181 @@ namespace Models.EF
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="xLingua_StagingModel", Name="User")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class User : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new User object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static User CreateUser(global::System.Int64 id)
+        {
+            User user = new User();
+            user.Id = id;
+            return user;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int64 _Id;
+        partial void OnIdChanging(global::System.Int64 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Firstname
+        {
+            get
+            {
+                return _Firstname;
+            }
+            set
+            {
+                OnFirstnameChanging(value);
+                ReportPropertyChanging("Firstname");
+                _Firstname = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Firstname");
+                OnFirstnameChanged();
+            }
+        }
+        private global::System.String _Firstname;
+        partial void OnFirstnameChanging(global::System.String value);
+        partial void OnFirstnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsApproved
+        {
+            get
+            {
+                return _IsApproved;
+            }
+            set
+            {
+                OnIsApprovedChanging(value);
+                ReportPropertyChanging("IsApproved");
+                _IsApproved = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsApproved");
+                OnIsApprovedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsApproved;
+        partial void OnIsApprovedChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsApprovedChanged();
+
+        #endregion
+    
     }
     
     /// <summary>

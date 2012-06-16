@@ -303,6 +303,11 @@ namespace Views.SL.ModelServiceReference {
         System.IAsyncResult BeginGetTranslationsFromBaseword(Views.SL.ModelServiceReference.BasewordDto basewordDto, System.AsyncCallback callback, object asyncState);
         
         System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> EndGetTranslationsFromBaseword(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IModelService/ValidateUser", ReplyAction="http://tempuri.org/IModelService/ValidateUserResponse")]
+        System.IAsyncResult BeginValidateUser(string email, string password, System.AsyncCallback callback, object asyncState);
+        
+        bool EndValidateUser(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -425,6 +430,25 @@ namespace Views.SL.ModelServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ValidateUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ValidateUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ModelServiceClient : System.ServiceModel.ClientBase<Views.SL.ModelServiceReference.IModelService>, Views.SL.ModelServiceReference.IModelService {
         
         private BeginOperationDelegate onBeginGetBasewordsByTextOrIdDelegate;
@@ -462,6 +486,12 @@ namespace Views.SL.ModelServiceReference {
         private EndOperationDelegate onEndGetTranslationsFromBasewordDelegate;
         
         private System.Threading.SendOrPostCallback onGetTranslationsFromBasewordCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginValidateUserDelegate;
+        
+        private EndOperationDelegate onEndValidateUserDelegate;
+        
+        private System.Threading.SendOrPostCallback onValidateUserCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -527,6 +557,8 @@ namespace Views.SL.ModelServiceReference {
         public event System.EventHandler<DeleteBasewordCompletedEventArgs> DeleteBasewordCompleted;
         
         public event System.EventHandler<GetTranslationsFromBasewordCompletedEventArgs> GetTranslationsFromBasewordCompleted;
+        
+        public event System.EventHandler<ValidateUserCompletedEventArgs> ValidateUserCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -804,6 +836,54 @@ namespace Views.SL.ModelServiceReference {
                         basewordDto}, this.onEndGetTranslationsFromBasewordDelegate, this.onGetTranslationsFromBasewordCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Views.SL.ModelServiceReference.IModelService.BeginValidateUser(string email, string password, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginValidateUser(email, password, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool Views.SL.ModelServiceReference.IModelService.EndValidateUser(System.IAsyncResult result) {
+            return base.Channel.EndValidateUser(result);
+        }
+        
+        private System.IAsyncResult OnBeginValidateUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string email = ((string)(inValues[0]));
+            string password = ((string)(inValues[1]));
+            return ((Views.SL.ModelServiceReference.IModelService)(this)).BeginValidateUser(email, password, callback, asyncState);
+        }
+        
+        private object[] OnEndValidateUser(System.IAsyncResult result) {
+            bool retVal = ((Views.SL.ModelServiceReference.IModelService)(this)).EndValidateUser(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnValidateUserCompleted(object state) {
+            if ((this.ValidateUserCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ValidateUserCompleted(this, new ValidateUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ValidateUserAsync(string email, string password) {
+            this.ValidateUserAsync(email, password, null);
+        }
+        
+        public void ValidateUserAsync(string email, string password, object userState) {
+            if ((this.onBeginValidateUserDelegate == null)) {
+                this.onBeginValidateUserDelegate = new BeginOperationDelegate(this.OnBeginValidateUser);
+            }
+            if ((this.onEndValidateUserDelegate == null)) {
+                this.onEndValidateUserDelegate = new EndOperationDelegate(this.OnEndValidateUser);
+            }
+            if ((this.onValidateUserCompletedDelegate == null)) {
+                this.onValidateUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnValidateUserCompleted);
+            }
+            base.InvokeAsync(this.onBeginValidateUserDelegate, new object[] {
+                        email,
+                        password}, this.onEndValidateUserDelegate, this.onValidateUserCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -953,6 +1033,20 @@ namespace Views.SL.ModelServiceReference {
             public System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> EndGetTranslationsFromBaseword(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto> _result = ((System.Collections.ObjectModel.ObservableCollection<Views.SL.ModelServiceReference.TranslationDto>)(base.EndInvoke("GetTranslationsFromBaseword", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginValidateUser(string email, string password, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = email;
+                _args[1] = password;
+                System.IAsyncResult _result = base.BeginInvoke("ValidateUser", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndValidateUser(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("ValidateUser", _args, result)));
                 return _result;
             }
         }

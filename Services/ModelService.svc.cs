@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Objects;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Text;
@@ -122,5 +123,11 @@ namespace Services
             var basewordDto = new BasewordDto { Id = basewordModel.Id, Text = basewordModel.Text, Language = languageDto, Wordtype = wordtypeDto, Comment = basewordModel.Comment, IsLocked = basewordModel.IsLocked.GetValueOrDefault() };
             return basewordDto;
         }
+
+        public bool ValidateUser(string email, string password)
+        {
+            return _context.Users1.FirstOrDefault(user => user.Email == email && user.Password == password) != null;
+        }
+
     }
 }

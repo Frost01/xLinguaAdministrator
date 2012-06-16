@@ -104,8 +104,8 @@ namespace Views.SL.ViewModels
             _client.UpdateBasewordCompleted += UpdateBasewordCallback;
             _client.DeleteBasewordCompleted += DeleteBasewordCallback;
             _client.GetTranslationsFromBasewordCompleted += GetTranslationsCallback;
-            _updateBasewordCommand = new RelayCommand(param=>UpdateBaseword());
-            _deleteBasewordCommand = new RelayCommand(param => this.DeleteBaseword());
+            _updateBasewordCommand = new RelayCommand(param=> UpdateBaseword());
+            _deleteBasewordCommand = new RelayCommand(param => DeleteBaseword());
         }
 
         private void GetTranslationsCallback(object sender, GetTranslationsFromBasewordCompletedEventArgs e)

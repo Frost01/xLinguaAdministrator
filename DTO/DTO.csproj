@@ -45,6 +45,7 @@
     <Compile Include="LanguageDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslationDto.cs" />
+    <Compile Include="UserDto.cs" />
     <Compile Include="WordtypeDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

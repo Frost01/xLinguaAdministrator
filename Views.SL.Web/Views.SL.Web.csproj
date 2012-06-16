@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\Views.SL.xap" />
+    <Content Include="Login.aspx" />
     <Content Include="robots.txt" />
     <Content Include="Silverlight.js" />
     <Content Include="Views.SLTestPage.aspx" />
@@ -75,6 +76,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
